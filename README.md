@@ -1,2 +1,4 @@
 # dotfiles
-personal dotfiles
+Repo for my personal dotfiles.
+
+- nvim
