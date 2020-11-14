@@ -28,3 +28,10 @@ export FZF_DEFAULT_OPTS='--height 33% --border -m --bind="\\:toggle-preview" --p
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
+
+[ -z "$NVM_DIR" ] && export NVM_DIR="$HOME/.nvm"
+source /usr/share/nvm/nvm.sh
+source /usr/share/nvm/install-nvm-exec
+
+# zsh syntax highlight
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
