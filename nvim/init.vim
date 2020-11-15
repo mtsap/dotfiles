@@ -43,7 +43,7 @@ set updatetime=300
 set shortmess+=c
 "set signcolumn=yes
 set timeoutlen=500
-set clipboard=unnamed
+set clipboard=unnamedplus
 filetype plugin on
 set wildmenu
 set colorcolumn=80
