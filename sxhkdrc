@@ -12,7 +12,7 @@ super + shift + b
 
 # program launcher
 super + @space
-	dmenu_run -nb "#141C21" -nf "#FB8C00" -sb "#FB8C00" -sf "#141C21" -fn scientifica
+	dmenu_run -nb "#141C21" -nf "#FB8C00" -sb "#FB8C00" -sf "#141C21" -fn scientifica -y 16 -x 800 -z 800
 
 # make sxhkd reload its configuration files:
 super + ctrl + r
@@ -30,9 +30,13 @@ super + BackSpace
 super + alt + {q,r}
 	bspc {quit,wm -r}
 
-# close and kill
+# close
 super + shift + w
 	bspc node -c
+
+# kill
+super + shift + q
+	bspc node -k
 
 # alternate between the tiled and monocle layout
 super + m
