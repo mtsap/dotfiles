@@ -1,0 +1,2 @@
+#!/bin/sh
+scrot --select --exec 'mv $f ~/Pictures/Screenshots'
