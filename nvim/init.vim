@@ -7,6 +7,7 @@ Plug 'morhetz/gruvbox'
 "-------------
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'edkolev/tmuxline.vim'
 Plug 'preservim/nerdtree'
 Plug 'jiangmiao/auto-pairs'
@@ -62,7 +63,6 @@ let g:gruvbox_italic = '1'
 let g:gruvbox_number_column='bg1'
 let g:gruvbox_italicize_strings='1'
 colorscheme gruvbox
-let g:airline_theme='gruvbox'
 
 " Remove newbie crutches in Insert Mode
 "inoremap <Down> <Nop>
@@ -101,15 +101,7 @@ nmap <C-l> <C-w>l
 " yank highlight config
 highlight HighlightedyankRegion ctermbg=black ctermfg=yellow
 
-" airline config
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_sep = ''
-let g:airline#extensions#tabline#left_alt_sep = ' '
-let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
-let g:airline#extensions#tmuxline#enabled = 0
-let g:airline#extensions#ale#enabled = 1
-
+source $HOME/.config/nvim/airline.vim
 source $HOME/.config/nvim/ale.vim
 source $HOME/.config/nvim/nerdtree.vim
 source $HOME/.config/nvim/fzf.vim
