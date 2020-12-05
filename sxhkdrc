@@ -22,6 +22,10 @@ super + ctrl + r
 super + BackSpace 
 	betterlockscreen -l blur
 
+# screenshot the whole screen
+super + F1
+  scrot --exec 'mv $f ~/Pictures/Screenshots' 
+
 #
 # bspwm hotkeys
 #
