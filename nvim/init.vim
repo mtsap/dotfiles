@@ -102,8 +102,8 @@ inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " Go to definition Coc commnands
-nmap <silent> <leader>gs :sp<CR><Plug>(coc-definition)
-nmap <silent> <leader>gv :vsp<CR><Plug>(coc-definition)
+nmap <silent> <leader>gd :vsp<CR><Plug>(coc-definition)
+nmap <silent> <leader>gu <Plug>(coc-references)
 
 " yank highlight config
 highlight HighlightedyankRegion ctermbg=black ctermfg=yellow
