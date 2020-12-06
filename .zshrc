@@ -23,6 +23,11 @@ source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+# General config    
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
+
 # FZF config
 export FZF_DEFAULT_OPTS='--height 33% --border -m --bind="\\:toggle-preview" --preview-window right:50% --preview "[[ $(file --mime {}) =~ binary ]] && echo {} is a binary file || (bat --theme=gruvbox --style=numbers --color=always {} || cat {}) 2> /dev/null | head -200"'
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'

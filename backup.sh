@@ -9,5 +9,6 @@ cp ~/.config/alacritty/alacritty.yml ./alacritty.yml
 cp ~/.config/betterlockscreenrc ./betterlockscreenrc
 mkdir -p nvim
 cp  ~/.config/nvim/*.vim ./nvim
+cp  ~/.config/nvim/*.json ./nvim
 cp -r ~/.config/polybar ./polybar
 cp -r ~/bin .

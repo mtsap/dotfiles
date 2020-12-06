@@ -18,11 +18,11 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'machakann/vim-highlightedyank' 
 Plug 'dense-analysis/ale'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "Plug 'yuezk/vim-js'
 "Plug 'neovim/node-host', { 'do': 'npm install' }
 "Plug 'billyvg/tigris.nvim', { 'do': './install.sh' }
 call plug#end()
-
 syntax on
 let mapleader="\<tab>"
 set noerrorbells
@@ -97,12 +97,19 @@ nmap <C-h> <C-w>h
 nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
+" Tab to move up and down to autocomplete list
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+" Go to definition Coc commnands
+nmap <silent> <leader>gs :sp<CR><Plug>(coc-definition)
+nmap <silent> <leader>gv :vsp<CR><Plug>(coc-definition)
 
 " yank highlight config
 highlight HighlightedyankRegion ctermbg=black ctermfg=yellow
 
 source $HOME/.config/nvim/airline.vim
-source $HOME/.config/nvim/ale.vim
 source $HOME/.config/nvim/nerdtree.vim
 source $HOME/.config/nvim/fzf.vim
+source $HOME/.config/nvim/ale.vim
 
