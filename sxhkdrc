@@ -8,7 +8,7 @@ super + Return
 
 # browser
 super + shift + b
-	google-chrome-stable
+	chromium
 
 # program launcher
 super + @space

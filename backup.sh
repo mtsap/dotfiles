@@ -1,6 +1,8 @@
 cp ~/.zshrc ./.zshrc
 cp ~/.zshenv ./.zshenv
 cp ~/.zshaliases ./.zshaliases
+cp ~/.zshandroid ./.zshandroid
+cp ~/.zshjdk15 ./.zshjdk15
 cp ~/.p10k.zsh ./.p10k.zsh
 cp ~/.xinitrc ./.xinitrc
 cp ~/.config/bspwm/bspwmrc ./bspwmrc

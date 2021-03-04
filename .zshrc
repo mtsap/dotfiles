@@ -42,3 +42,8 @@ source /usr/share/nvm/install-nvm-exec
 source ~/.zshaliases
 # zsh syntax highlight
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /home/mtsap/.zshjdk15
+source /home/mtsap/.zshandroid
+eval $(keychain --eval --quiet ~/.ssh/id_bitbucket)
+
+#[ -s "/home/mtsap/.jabba/jabba.sh" ] && source "/home/mtsap/.jabba/jabba.sh"
