@@ -9,6 +9,7 @@ cp ~/.config/bspwm/bspwmrc ./bspwmrc
 cp ~/.config/sxhkd/sxhkdrc ./sxhkdrc
 cp ~/.config/alacritty/alacritty.yml ./alacritty.yml
 cp ~/.config/betterlockscreenrc ./betterlockscreenrc
+cp  -r ~/.config/rofi ./rofi
 mkdir -p nvim
 cp  ~/.config/nvim/*.vim ./nvim
 cp  ~/.config/nvim/*.json ./nvim
