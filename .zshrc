@@ -34,6 +34,9 @@ export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
 
+
+eval $(keychain --eval --quiet ~/.ssh/id_bitbucket) 
+
 # nvim config
 [ -z "$NVM_DIR" ] && export NVM_DIR="$HOME/.nvm"
 source /usr/share/nvm/nvm.sh
@@ -44,6 +47,5 @@ source ~/.zshaliases
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /home/mtsap/.zshjdk15
 source /home/mtsap/.zshandroid
-eval $(keychain --eval --quiet ~/.ssh/id_bitbucket)
 
 #[ -s "/home/mtsap/.jabba/jabba.sh" ] && source "/home/mtsap/.jabba/jabba.sh"
