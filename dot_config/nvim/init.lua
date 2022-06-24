@@ -2,12 +2,12 @@
 vim.opt.termguicolors = true
 
 require('bindings')
+require('lsp-config')
 require('fugitive-config')
 require('nvim-tree-config')
 require('telescope-config')
 require('gruvbox-material-config')
 require('treesitter-config')
-require('lsp-config')
 require('autopairs-config')
 require('devicons-config')
 require('formatter-config')
@@ -71,7 +71,7 @@ require('packer').startup(function(use)
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
   use { 'mfussenegger/nvim-ts-hint-textobject' }
   use "mhartington/formatter.nvim"
-  use "glepnir/lspsaga.nvim"
+  -- use "glepnir/lspsaga.nvim"
   use {
    "folke/trouble.nvim",
    requires = "kyazdani42/nvim-web-devicons",
@@ -104,13 +104,13 @@ require('packer').startup(function(use)
      require('fidget').setup()
    end
   }
-  use {
-    'stonelasley/flare.nvim',
-    config = function() require('flare').setup{
-      enabled = true, -- disable highlighting
-      hl_group = "Search", 
-    } end
-  }
+  -- use {
+  --   'stonelasley/flare.nvim',
+  --   config = function() require('flare').setup{
+  --     enabled = true, -- disable highlighting
+  --     hl_group = "Search", 
+  --   } end
+  -- }
 end)
 
 
