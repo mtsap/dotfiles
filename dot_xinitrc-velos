@@ -39,6 +39,6 @@ fi
 setxkbmap -model pc104 -layout us,gr -option grp:lalt_lshift_toggle
 nitrogen --set-zoom-fill ~/Pictures/wallpapers/f14-2.jpg
 picom &
-xmobar /home/mtsap/.config/xmonad/xmobar-config &
+xmobar /home/mtsap/.config/xmonad/xmobar-config-laptop &
 # ~/.config/polybar/launch.sh
 exec xmonad
