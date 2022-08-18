@@ -1,0 +1,50 @@
+Config { font = "xft:scientifica-11"
+       , additionalFonts = ["xft:Symbols 2048 em-12"]
+       , borderColor = "black"
+       , bgColor = "#141C21"
+       , fgColor = "grey"
+       , alpha = 255
+       , position = Static { xpos = 30 , ypos = 5, width = 2507, height = 24 }
+       , textOffset = -1
+       , iconOffset = -1
+       , lowerOnStart = True
+       , pickBroadest = False
+       , persistent = False
+       , hideOnStart = False
+       , iconRoot = "."
+       , allDesktops = True
+       , overrideRedirect = True
+       , commands = [ Run Weather "EGPF" ["-t","<station>: <tempC>C",
+                                          "-L","18","-H","25",
+                                          "--normal","green",
+                                          "--high","red",
+                                          "--low","lightblue"] 36000
+                    , Run Network "eth1" [ "--s","true", "--template", "<rx> - <tx>"] 30
+                    , Run Cpu [] 10
+                    , Run Memory ["-t","Mem: <usedratio>%"] 10
+                    , Run Swap [] 10
+                    , Run Com "uname" ["-s","-r"] "" 36000
+                    , Run Date "%a %b %_d %Y %H:%M" "date" 10
+                    , Run Kbd [ ("gr" , "GR")
+                             , ("us" , "US")
+                             ]
+                    , Run Alsa "default" "Master"
+                        [ "--template", "<volumestatus>"
+                        , "--suffix"  , "True"
+                        , "--"
+                        , "--on", ""
+                        ]
+                    ,Run XMonadLog
+                    ,Run Mpris2 "spotify" ["-t", "aa<artist> <title>"] 10
+                    ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = "<fc=#F57C00> λ</fc> %XMonadLog% }\
+                    \<fc=#F57C00,#141C21><box width=2 color=#141C21 > %mpris2% </box></fc>\
+                    \{<fn=2><fc=#FFCC80,#141C21:0></fc></fn><fc=#141C21,#FFCC80:0>%kbd%</fc>\
+                    \<fn=2><fc=#141C21,#FFCC80:0></fc></fn><fc=#FFCC80,#141C21>%alsa:default:Master% </fc>\
+                    \<fc=#141C21,#FFCC80:0><box width=2 color=#141C21 > %cpu% </box></fc>\
+                    \<fc=#141C21,#FFB74D:0><box width=2 color=#141C21 > %memory% </box></fc>\
+                    \<fc=#141C21,#ee9a00:0><box width=1 color=#141C21 > %eth1% </box></fc>\
+                    \<fc=#141C21,#F57C00:0><box color=#141C21 > %date% </box></fc>"
+       }
