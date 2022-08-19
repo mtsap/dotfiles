@@ -1,0 +1,2 @@
+#!/bin/sh
+prompt "Turn off" "shutdown -h now"

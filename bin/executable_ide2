@@ -1,0 +1,7 @@
+#!/bin/sh
+
+tmux split-window -h -p 25 
+tmux split-window -v -p 25  
+tmux select-pane -U
+sleep 1
+clear && tmux send-keys -t 1 clear C-m && tmux send-keys -t 2 clear C-m
