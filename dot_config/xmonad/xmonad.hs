@@ -81,6 +81,8 @@ myConfig =
                       , ("M-v", spawn $ "sleep 0.25 && xdotool type --clearmodifiers \"$(xclip -o -selection primary)\"")
                       , ("<XF86AudioLowerVolume>", spawn $ "ponymix decrease 1")
                       , ("<XF86AudioRaiseVolume>", spawn $ "ponymix increase 1")
+                      , ("<XF86MonBrightnessUp>", spawn $ "light -A 5")
+                      , ("<XF86MonBrightnessDown>", spawn $ "light -U 5")
                       , ("M-i", spawn $ "ponymix increase 1")
                       , ("M-<Backspace>", spawn $ "betterlockscreen -l blur")
                       , ("M-o", spawn $ "scrot --exec 'mv $f ~/Pictures/Screenshots'")
