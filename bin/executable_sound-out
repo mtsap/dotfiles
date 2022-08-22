@@ -1,9 +1,28 @@
 
 #!/bin/sh
 
-if [ $(echo -e "Headphones\nScreen" |  dmenu -nb "#141C21" -nf "#FB8C00" -sb "#FB8C00" -sf "#141C21" -fn scientifica -y 6 -x 800 -z 800 -i -p "$1") \
-  == "Headphones" ]; then
-  ponymix list | grep "sink" | grep "MOTU" | cut -d " " -f 3 | xargs -I @@ ponymix -d @@ set-default
-else
-  ponymix list | grep "sink" | grep "hdmi" | cut -d " " -f 3 | xargs -I @@ ponymix -d @@ set-default
-fi
+# if [ $(echo -e "Headphones\nScreen\nInternal" |  dmenu -nb "#141C21" -nf "#FB8C00" -sb "#FB8C00" -sf "#141C21" -fn scientifica -y 6 -x 800 -z 800 -i -p "$1") \
+#   == "Headphones" ]; then
+#   ponymix list | grep "sink" | grep "MOTU" | cut -d " " -f 3 | xargs -I @@ ponymix -d @@ set-default
+# else
+#   ponymix list | grep "sink" | grep "hdmi" | cut -d " " -f 3 | xargs -I @@ ponymix -d @@ set-default
+# fi
+
+case $(echo -e "Headphones\nScreen\nInternal" |  dmenu -nb "#141C21" -nf "#FB8C00" -sb "#FB8C00" -sf "#141C21" -fn scientifica -y 6 -x 800 -z 800 -i -p "$1") in
+
+  "Headphones")
+    ponymix list | grep "sink" | grep "MOTU" | cut -d " " -f 3 | xargs -I @@ ponymix -d @@ set-default
+    ;;
+
+  "Screen")
+    ponymix list | grep "sink" | grep "hdmi" | cut -d " " -f 3 | xargs -I @@ ponymix -d @@ set-default
+    ;;
+
+  "Internal")
+    ponymix list | grep "sink" | grep "pci-0000_07_00" | cut -d " " -f 3 | xargs -I @@ ponymix -d @@ set-default
+    ;;
+
+  *)
+    echo "default"
+    ;;
+esac
