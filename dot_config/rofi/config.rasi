@@ -1,0 +1,81 @@
+configuration {
+  display-drun: "";
+  display-window: "";
+  display-run: "";
+  drun-display-format: "{name}";
+  font: "Scientifica 10";
+  modi: "window,run,drun";
+  location: 2;
+  yoffset: 8;
+}
+
+@theme "/dev/null"
+
+* {
+  bg: #141C21;
+  bg-alt: #FB8C00;
+
+  fg: #141C21;
+  fg-alt: #663f01;
+  fg-sel: #FB8C00;
+
+  background-color: @bg;
+  
+  border: 0;
+  margin: 0;
+  padding: 0;
+  spacing: 0;
+}
+
+window {
+  width: 30%;
+}
+
+element {
+  padding: 8 0;
+  text-color: @fg-alt;
+}
+
+element selected {
+  background-color: @bg;
+  text-color: @fg-sel;
+}
+
+element-text {
+  text-color: inherit;
+  vertical-align: 0.5;
+}
+
+element-icon {
+  size: 14;
+  padding: 0 10 0 0;
+}
+
+entry {
+  background-color: @bg;
+  padding: 12;
+  text-color: @fg-sel;
+}
+
+inputbar {
+  children: [prompt, entry];
+}
+
+listview {
+  padding: 8 12;
+  background-color: @bg;
+  columns: 1;
+  lines: 8;
+}
+
+mainbox {
+  background-color: @bg;
+  children: [inputbar, listview];
+}
+
+prompt {
+  background-color: @bg;
+  enabled: true;
+  padding: 12 0 0 12;
+  text-color: @fg;
+}
