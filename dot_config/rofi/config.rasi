@@ -21,18 +21,20 @@ configuration {
 
   background-color: @bg;
   
-  border: 0;
+  border: 1;
+  border-radius:  4px 4px 4px 4px;
   margin: 0;
   padding: 0;
   spacing: 0;
 }
 
 window {
-  width: 30%;
+  width: 25%;
+  border-color: @fg-sel;
 }
 
 element {
-  padding: 8 0;
+  padding: 6 0;
   text-color: @fg-alt;
 }
 
@@ -62,10 +64,11 @@ inputbar {
 }
 
 listview {
-  padding: 8 12;
+  padding: 6 6;
   background-color: @bg;
   columns: 1;
   lines: 8;
+  spacing: 1px;
 }
 
 mainbox {
