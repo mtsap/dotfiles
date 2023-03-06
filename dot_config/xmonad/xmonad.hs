@@ -66,8 +66,8 @@ myConfig =
     -- , startupHook = customStartHook
     }
     `additionalKeysP` [ ("M-<Return>", spawn "kitty")
-                      , ("M-<Space>", spawn "dmenu_run -nb \"#141C21\" -nf \"#FB8C00\" -sb \"#FB8C00\" -sf \"#141C21\" -fn scientifica -y 6 -x 800 -z 800")
-                      , ("M-S-n", spawn "chromium --profile-directory=Default")
+                      , ("M-<Space>", spawn "rofi -show run")
+                      , ("M-S-n", spawn "google-chrome-stable --profile-directory=Default")
                       , ("M-S-w", kill)
                       , ("M1-<Tab>", spawn "rofi -show window")
                       , ("M-m", sendMessage NextLayout)
