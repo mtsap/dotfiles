@@ -41,10 +41,8 @@ source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
 
 
-eval $(keychain --eval --quiet ~/.ssh/id_bitbucket) 
+# eval $(keychain --eval --quiet ~/.ssh/id_bitbucket) 
 
-source /home/mtsap/.zshnvim
-source /home/mtsap/.zshrbenv
 #aliases
 source ~/.zshaliases
 # zsh syntax highlight
@@ -55,8 +53,6 @@ if [[ -f "/home/mtsap/.zshwork" ]]; then
   source /home/mtsap/.zshwork
 fi
 
-# biwarden dmenu session
-source /home/mtsap/.cache/bwsession
 
 #[ -s "/home/mtsap/.jabba/jabba.sh" ] && source "/home/mtsap/.jabba/jabba.sh"
 

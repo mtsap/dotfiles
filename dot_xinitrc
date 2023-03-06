@@ -37,8 +37,8 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
 fi
 
 setxkbmap -model pc104 -layout us,gr -option grp:lalt_lshift_toggle
-nitrogen --set-zoom-fill ~/Pictures/wallpapers/wp4413782-forest-light-wallpapers.jpg
+nitrogen --set-zoom-fill ~/Pictures/wallpapers/f14-2.jpg
 picom &
-xmobar /home/mtsap/.config/xmonad/xmobar-config &
-# ~/.config/polybar/launch.sh
-exec /home/mtsap/.local/bin/xmonad
+xmobar /home/mtsap/.config/xmonad/xmobar-config-laptop &
+~/.config/polybar/launch.sh --shapes
+exec xmonad
