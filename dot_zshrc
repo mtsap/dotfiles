@@ -43,6 +43,7 @@ source /usr/share/fzf/completion.zsh
 
 # eval $(keychain --eval --quiet ~/.ssh/id_bitbucket) 
 
+source ./.zshfnm
 #aliases
 source ~/.zshaliases
 # zsh syntax highlight

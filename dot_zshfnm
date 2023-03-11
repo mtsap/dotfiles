@@ -1,0 +1,2 @@
+# fnm config
+eval "$(fnm env --use-on-cd)"
