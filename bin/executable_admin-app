@@ -1,0 +1,14 @@
+#!/bin/sh
+cd ~/code/greyfinch
+sleep 1
+tmux split-window -h -p 75 
+tmux split-window -h -p 66  
+tmux split-window -h -p 50  
+tmux select-pane -L
+tmux select-pane -L
+tmux select-pane -L
+tmux  send-keys -t 0 "cd ~/code/greyfinch  && pnpm run simple:tools" C-m
+tmux  send-keys -t 1 "cd functions; pnpm run start" C-m
+tmux  send-keys -t 2 "cd data; pnpm run start" C-m
+tmux  send-keys -t 3 "cd apps/admin; pnpm run start:simple"  C-m
+
