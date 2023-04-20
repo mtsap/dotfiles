@@ -8,3 +8,9 @@ opt.mouse = ""
 opt.showmode = true
 opt.cursorline = false
 opt.colorcolumn = "80"
+
+vim.diagnostic.config({
+  float = { border = "single" },
+})
+
+vim.api.nvim_create_user_command("Folders", "!cd %:h; folders", { nargs = "?" })

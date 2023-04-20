@@ -47,6 +47,14 @@ return {
           return item
         end,
       },
+      window = {
+        completion = {
+          border = "rounded",
+        },
+        documentation = {
+          border = "rounded",
+        },
+      },
       experimental = {
         ghost_text = {
           hl_group = "LspCodeLens",
