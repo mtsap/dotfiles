@@ -32,15 +32,10 @@ map("v", "<Down>", "<Nop>", options)
 map("v", "<Left>", "<Nop>", options)
 map("v", "<Right>", "<Nop>", options)
 
-map("n", "<leader>ff", ":Telescope find_files<cr>", telescope_options)
-map("n", "<leader>fbb", ":Telescope buffers<cr>", telescope_options)
-map("n", "<leader>fg", ":Telescope live_grep<cr>", telescope_options)
-map("n", "<leader>fc", ":Telescope git_commits<cr>", telescope_options)
-map("n", "<leader>fb", ":Telescope git_branches<cr>", telescope_options)
-map("n", "<leader>fcc", ":Telescope git_bcommits<cr>", telescope_options)
-map("n", "<leader>fm", ":Telescope media_files<cr>", telescope_options)
-
 map("n", "<C-d>", "<C-d>zz", options)
 map("n", "<C-u>", "<C-u>zz", options)
 map("n", "n", "nzz", options)
 map("n", "N", "Nzz", options)
+
+map("n", "gh", "0", { noremap = true, silent = true, desc = "Start of line" })
+map("n", "gl", "$", { noremap = true, silent = true, desc = "End of line" })

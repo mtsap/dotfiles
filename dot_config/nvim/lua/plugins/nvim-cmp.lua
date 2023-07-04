@@ -7,13 +7,22 @@ return {
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-path",
     "saadparwaiz1/cmp_luasnip",
+    {
+      "Saecki/crates.nvim",
+      event = { "BufRead Cargo.toml" },
+      config = true,
+    },
   },
-  opts = function()
+  opts = function(_, opts)
     local cmp = require("cmp")
+    opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {
+      { name = "crates" },
+    }))
     return {
       completion = {
         completeopt = "menu,menuone,noinsert",
       },
+
       snippet = {
         expand = function(args)
           require("luasnip").lsp_expand(args.body)
