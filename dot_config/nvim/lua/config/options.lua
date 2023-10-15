@@ -13,4 +13,12 @@ vim.diagnostic.config({
   float = { border = "single" },
 })
 
-vim.api.nvim_create_user_command("Folders", "!cd %:h; folders", { nargs = "?" })
+vim.api.nvim_create_user_command("Simple", function(opts)
+  local path = vim.fn.expand("%:h")
+  print(opts.fargs[1], opts.fargs[2], "weeeeee")
+  if opts.fargs[2] == nil then
+    os.execute("cd " .. path .. "; folders -t " .. opts.fargs[1] .. ";")
+  else
+    os.execute("cd " .. path .. "; folders -t " .. opts.fargs[1] .. " -n " .. opts.fargs[2] .. ";")
+  end
+end, { nargs = "*" })

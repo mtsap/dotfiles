@@ -27,7 +27,7 @@ return {
     autoformat = true,
     -- Enable this to show formatters used in a notification
     -- Useful for debugging formatter issues
-    format_notify = true,
+    -- format_notify = true,
     -- options for vim.lsp.buf.format
     -- `bufnr` and `filter` is handled by the LazyVim formatter,
     -- but can be also overridden when specified
@@ -38,6 +38,8 @@ return {
     -- LSP Server Settings
     ---@type lspconfig.options
     servers = {
+
+      simple = {},
       jsonls = {},
       rust_analyzer = {
 
@@ -111,6 +113,24 @@ return {
       -- end,
       -- Specify * to use this function as a fallback for any server
       -- ["*"] = function(server, opts) end,
+      simple = function(_, opt)
+        local lspconfig = require("lspconfig")
+        local util = require("lspconfig.util")
+        local configs = require("lspconfig.configs")
+
+        if not configs.simple then
+          configs.simple = {
+            default_config = {
+              cmd = { "/home/mtsap/code/simple/mono/vscode-extension/lsp-server.js", "--stdio" },
+              filetypes = { "simple" },
+              root_dir = util.find_git_ancestor,
+              settings = {},
+            },
+          }
+        end
+
+        lspconfig.simple.setup({})
+      end,
       rust_analyzer = function(_, opts)
         local rust_tools_opts = require("lazyvim.util").opts("rust-tools.nvim")
         require("rust-tools").setup(vim.tbl_deep_extend("force", rust_tools_opts or {}, { server = opts }))
