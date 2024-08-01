@@ -19,7 +19,6 @@
         "tray"
     ],
     "modules-right": [
-        "load",
 	"cpu",
 	"memory",
 	"temperature",
