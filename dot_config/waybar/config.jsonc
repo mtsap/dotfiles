@@ -1,0 +1,236 @@
+// -*- mode: jsonc -*-
+[{
+    "output": ["DP-1", "eDP-2"],
+    // "layer": "top", // Waybar at top layer
+    // "position": "bottom", // Waybar position (top|bottom|left|right)
+    // "height": 24, // Waybar height (to be removed for auto height)
+    // "width": 1280, // Waybar width
+    "spacing": 4, // Gaps between modules (4px)
+    // Choose the order of the modules
+    "modules-left": [
+        "hyprland/workspaces",
+        "hyprland/window",
+        "mpris"
+    ],
+    "modules-center": [
+        "cava",
+        "clock",
+	"hyprland/language",
+        "tray"
+    ],
+    "modules-right": [
+        "load",
+	"cpu",
+	"memory",
+	"temperature",
+	"network",
+	"wireplumber",
+        "backlight",
+        "battery"
+    ],
+    // Modules configuration
+    "network": {
+    "interface": "wlan0",
+    "format": "{ifname}",
+    "format-wifi": "{essid} ({signalStrength}%) ",
+    "format-ethernet": "{ipaddr}/{cidr} 󰊗",
+    "format-disconnected": "", //An empty format will hide the module.
+    "tooltip-format": "{ifname} via {gwaddr} 󰊗",
+    "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
+    "tooltip-format-ethernet": "{ifname} ",
+    "tooltip-format-disconnected": "Disconnected",
+    "max-length": 50
+    },
+    "cpu": {
+     "format": "{icon0} {icon1} {icon2} {icon3} {icon4} {icon5} {icon6} {icon7}",
+     "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"]
+    },
+    "memory": {
+    "interval": 30,
+    "format": "{used:0.1f}G "
+    },
+    "temperature": {
+    // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+    // "critical-threshold": 80,
+    // "format-critical": "{temperatureC}°C ",
+      "thermal-zone": 0,
+      "format": "{temperatureC}°C "
+    },
+    "hyprland/workspaces": {
+	"active-only":false,
+	"all-outputs":true,
+        "format": "{icon}",
+	"persistent-workspaces":{
+		"*":6
+	},
+        "format-icons": {
+            "1": "",
+            "2": "",
+            "3": "",
+            "4": "",
+            "5": "",
+            "6": ""
+        }
+    },
+    "hyprland/language": {
+    "format": "{}",
+    "format-en": "eng",
+    "format-gr": "gr"
+    },
+    "hyprland/window": {
+        "format": "{title}",
+        "max-length": 80,
+        "all-outputs": true
+    },
+    "cava": {
+	//"cava_config": "$XDG_CONFIG_HOME/cava/cava.conf",
+	"framerate": 30,
+	"autosens": 1,
+	"bars": 14,
+	"lower_cutoff_freq": 50,
+	"higher_cutoff_freq": 10000,
+	"method": "pulse",
+	"source": "auto",
+	"stereo": true,
+	"bar_delimiter": 0,
+	"noise_reduction": 0.77,
+	"input_delay": 2,
+        "hide_on_silence": true,
+	"format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" ],
+	"actions": {
+	    "on-click-right": "mode"
+	}
+    },
+    "mpris": {
+ 	"format": " {status_icon} {dynamic}",
+        "interval": 1,
+        "dynamic-len": 60,
+	"status-icons": {
+		"playing": "▶",
+		"paused": "⏸",
+		"stopped": ""
+	},
+	"dynamic-order": ["title", "artist"],
+	"ignored-players": ["firefox"]
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+    },
+    "tray": {
+        "icon-size": 14,
+        "spacing": 10
+    },
+    "load": {
+        "format": " {}"
+    },
+    "clock": {
+        // "timezone": "America/New_York",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format": " {:%a %m/%D/%Y %H:%M:%S}",
+	"interval":1
+    },
+    "custom/weather": {
+        "format": "{}°",
+        "tooltip": true,
+        "interval": 3600,
+        "exec": "wttrbar -l zh-tw --icon-family nerd",
+        "return-type": "json"
+    },
+    "backlight": {
+        // "device": "acpi_video1",
+        "format": "{icon} {percent}%",
+        "format-icons": ["", "", "", "", "", "", "", "", ""]
+    },
+    "battery": {
+        "states": {
+            // "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon} {capacity}%",
+        "format-full": "{icon} {capacity}%",
+        "format-charging": "󰃨 {capacity}%",
+        "format-plugged": " {capacity}%",
+        "format-alt": "{icon} {time}",
+        // "format-good": "", // An empty format will hide the module
+        // "format-full": "",
+        "format-icons": ["", "", "", "", ""]
+    },
+    "wireplumber": {
+        "scroll-step": 5, // %, can be a float
+        "format": "{icon} {volume}%",
+        "format-bluetooth": "{icon} {volume}% ",
+        "format-bluetooth-muted": "󰆪 {icon}",
+        "format-muted": "󰆪",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "󰂑",
+            "headset": "󰂑",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "on-click-right": "pavucontrol"
+    }
+},{
+    "output": ["HDMI-A-1"],
+    // "layer": "top", // Waybar at top layer
+    // "position": "bottom", // Waybar position (top|bottom|left|right)
+    "height": 24, // Waybar height (to be removed for auto height)
+    // "width": 1280, // Waybar width
+    "spacing": 4, // Gaps between modules (4px)
+    // Choose the order of the modules
+    "modules-left": [
+        "sway/workspaces",
+        "sway/mode",
+        "sway/scratchpad"
+    ],
+    "modules-center": [
+    ],
+    "modules-right": [
+        "sway/window",
+        "clock"
+    ],
+    "sway/workspaces": {
+        "all-outputs": false,
+        "warp-on-scroll": true,
+        "enable-bar-scroll": true,
+        "format": "{icon}",
+        "format-icons": {
+            "1": "",
+            "2": "",
+            "3": "",
+            "4": "",
+            "5": "",
+            "9": "󱤨",
+            "10": ""
+        }
+    },
+    "sway/window": {
+        "format": "{title}",
+        "max-length": 40,
+        "all-outputs": true
+    },
+    "sway/mode": {
+        "format": "{}"
+    },
+    "sway/scratchpad": {
+        "format": "{icon} {count}",
+        "show-empty": false,
+        "format-icons": ["", ""],
+        "tooltip": true,
+        "tooltip-format": "{app}: {title}"
+    },
+    "clock": {
+        // "timezone": "America/New_York",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format": " {:%H:%M}",
+        "format-alt": " {:%a %F}"
+    }
+}]
