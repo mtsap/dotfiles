@@ -34,7 +34,6 @@ M.mine = {
   },
 }
 
-
 M.telescope = {
   plugin = true,
 
@@ -84,49 +83,6 @@ M.tmuNavigator = {
     ["<C-j>"] = { "<cmd>TmuxNavigateDown<cr>", "Go to down window" },
     ["<C-k>"] = { "<cmd>TmuxNavigateUp<cr>", "Go to up window" },
     ["<C-l>"] = { "<cmd>TmuxNavigateRight<cr>", "Go to right window" },
-  },
-}
-
-M.trouble = {
-
-  n = {
-
-    ["<leader>xx"] = {
-      function()
-        require("trouble").toggle()
-      end,
-      "Toggle Trouble",
-    },
-    ["<leader>xw"] = {
-      function()
-        require("trouble").toggle "workspace_diagnostics"
-      end,
-      "Workspace diagnostics",
-    },
-    ["<leader>xd"] = {
-      function()
-        require("trouble").toggle "document_diagnostics"
-      end,
-      "Document diagnostics",
-    },
-    ["<leader>xq"] = {
-      function()
-        require("trouble").toggle "quickfix"
-      end,
-      "quickfix",
-    },
-    ["<leader>xl"] = {
-      function()
-        require("trouble").toggle "loclist"
-      end,
-      "loclist",
-    },
-    ["<leader>gR"] = {
-      function()
-        require("trouble").toggle "lsp_references"
-      end,
-      "Lsp references",
-    },
   },
 }
 
