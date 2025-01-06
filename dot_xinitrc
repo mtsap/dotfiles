@@ -41,4 +41,5 @@ nitrogen --set-zoom-fill ~/Pictures/wallpapers/f14-2.jpg
 picom &
 xmobar /home/mtsap/.config/xmonad/xmobar-config-laptop &
 ~/.config/polybar/launch.sh --shapes
+exec --no-startup-id /usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh &
 exec xmonad
