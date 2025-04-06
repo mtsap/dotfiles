@@ -1,0 +1,6 @@
+-- require("autocmds")
+require("options")
+require("mappings")
+require("plugins")
+require("consts")
+-- require("cmds")
