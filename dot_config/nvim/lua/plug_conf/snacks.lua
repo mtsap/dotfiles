@@ -2,7 +2,7 @@ local Mode = require("consts").modes
 local Snacks = require("snacks")
 
 Snacks.setup({
-	bigfile = { enabled = true },
+	bigfile = { enabled = false },
 	dashboard = { enabled = true },
 	explorer = { enabled = false },
 	indent = { enabled = true },

@@ -22,7 +22,7 @@ capabilities.textDocument.completion.completionItem = {
 }
 
 -- if you just want default config for the servers then put them in a table
-local servers = { "html", "cssls", "ts_ls", "clangd", "gopls", "lua_ls" }
+local servers = { "html", "cssls", "ts_ls", "clangd", "gopls", "lua_ls", "yamlls" }
 
 for _, lsp in ipairs(servers) do
 	lspconfig[lsp].setup({

@@ -15,6 +15,7 @@ lint.linters_by_ft = {
 	typescript = { "eslint_d" },
 	vue = { "eslint_d" },
 	go = { "golangcilint" },
+	yaml = { "yamllint" },
 }
 
 local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })

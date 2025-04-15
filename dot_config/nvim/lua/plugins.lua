@@ -119,7 +119,7 @@ local plugins = {
 	},
 	{
 		"ibhagwan/fzf-lua",
-		dependencies = { "echasnovski/mini.icons" },
+		dependencies = { "echasnovski/mini.icons", opts = { style = "glyph" } },
 		config = get_setup("fzf"),
 	},
 	{
@@ -154,9 +154,10 @@ local plugins = {
 		config = get_setup("mini_surround"),
 	},
 	{ "echasnovski/mini.comment", version = false, opts = {} },
-	{ "echasnovski/mini.jump", version = false, opts = {} },
+	{ "echasnovski/mini.jump", version = false, config = get_setup("mini_jump") },
 	{ "echasnovski/mini.jump2d", version = false, opts = {} },
 	{ "echasnovski/mini.files", version = false, opts = {} },
+	{ "echasnovski/mini.icons", version = false, opts = { style = "glyph" } },
 	---------------------
 	-------  LSP --------
 	---------------------
