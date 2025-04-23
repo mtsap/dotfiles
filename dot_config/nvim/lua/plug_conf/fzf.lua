@@ -23,13 +23,14 @@ vim.keymap.set(Mode.normal, "<leader>fb", function()
 	fzf.buffers()
 end, { noremap = true })
 
-vim.keymap.set(Mode.normal, "<leader>ca", function()
-	fzf.lsp_code_actions({
-		winopts = {
-			backdrop = 60,
-			height = 0.50, -- window height
-			width = 0.40,
-			preview = { hidden = true },
-		},
-	})
-end, { noremap = true, silent = true })
+-- handled in lspsaga
+-- vim.keymap.set(Mode.normal, "<leader>ca", function()
+-- 	fzf.lsp_code_actions({
+-- 		winopts = {
+-- 			backdrop = 60,
+-- 			height = 0.50, -- window height
+-- 			width = 0.40,
+-- 			preview = { hidden = true },
+-- 		},
+-- 	})
+-- end, { noremap = true, silent = true })
