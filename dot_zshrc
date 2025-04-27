@@ -43,7 +43,8 @@ source /usr/share/fzf/completion.zsh
 
 # eval $(keychain --eval --quiet ~/.ssh/id_bitbucket) 
 
-source $HOME/.zshfnm
+# source $HOME/.zshfnm
+source /usr/share/nvm/init-nvm.sh
 #aliases
 source ~/.zshaliases
 # zsh syntax highlight

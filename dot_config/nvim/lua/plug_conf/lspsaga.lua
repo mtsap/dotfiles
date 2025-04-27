@@ -12,7 +12,7 @@ lspsaga.setup({
 	},
 })
 
-vim.keymap.set(mode.normal, "gd", "<cmd>Lspsaga code_action<CR>", { noremap = true, silent = true })
+vim.keymap.set(mode.normal, "<leader>ca", "<cmd>Lspsaga code_action<CR>", { noremap = true, silent = true })
 
 -- vim.keymap.set(mode.normal, "gD", function()
 -- 	vim.lsp.buf.declaration()
