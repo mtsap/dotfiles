@@ -1,14 +1,22 @@
 local lint = require("lint")
 
-local goci = lint.linters.golangcilint
-
-goci.args = {
-	"run",
-	"--output.json.path=stdout",
-	"--show-stats=false",
-	"--issues-exit-code",
-	"0",
-}
+-- lint.linters.golangci_lint = {
+-- 	cmd = "golangci-lint",
+-- 	stdin = false,
+-- 	args = {
+-- 		"run",
+-- 		"--out-format",
+-- 		"json",
+-- 		"--path-prefix",
+-- 		vim.fn.getcwd(),
+-- 	},
+-- 	stream = "stdout",
+-- 	ignore_exitcode = true,
+-- 	parser = require("lint.parser").from_errorformat([[
+--   %#%f:%l:%c: %m
+--   %#%f:%l: %m
+--   ]]),
+-- }
 
 lint.linters_by_ft = {
 	javascript = { "eslint_d" },
