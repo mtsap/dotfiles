@@ -3,10 +3,9 @@ configuration {
   display-window: "";
   display-run: "";
   drun-display-format: "{name}";
-  font: "Scientifica 10";
+  font: "Scientifica 13";
   modi: "window,run,drun";
-  location: 2;
-  yoffset: 8;
+	yoffset: 200;
 }
 
 @theme "/dev/null"
@@ -21,7 +20,7 @@ configuration {
 
   background-color: @bg;
   
-  border: 1;
+  border: 3;
   border-radius:  4px 4px 4px 4px;
   margin: 0;
   padding: 0;
@@ -29,7 +28,8 @@ configuration {
 }
 
 window {
-  width: 25%;
+  width: 39%;
+  height: 33%;
   border-color: @fg-sel;
 }
 
@@ -71,8 +71,20 @@ listview {
   spacing: 1px;
 }
 
+imagebox {
+	border: 1;
+	border-radius:  4px 4px 4px 4px;
+    background-color:            transparent;
+    background-image:            url("~/Pictures/wallpapers/f14-3.jpg",height);
+}
+
 mainbox {
   background-color: @bg;
+  children: [imagebox, mycontainer];
+  orientation: horizontal;
+}
+
+mycontainer {
   children: [inputbar, listview];
 }
 
@@ -80,5 +92,5 @@ prompt {
   background-color: @bg;
   enabled: true;
   padding: 12 0 0 12;
-  text-color: @fg;
+  text-color: @fg-sel;
 }

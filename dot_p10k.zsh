@@ -49,12 +49,12 @@
     #virtualenv              # python virtual environment (https://docs.python.org/3/library/venv.html)
     #anaconda                # conda environment (https://conda.io/)
     #pyenv                   # python environment (https://github.com/pyenv/pyenv)
-    #goenv                   # go environment (https://github.com/syndbg/goenv)
-    #nodenv                  # node.js version from nodenv (https://github.com/nodenv/nodenv)
-    #nvm                     # node.js version from nvm (https://github.com/nvm-sh/nvm)
-    #nodeenv                 # node.js environment (https://github.com/ekalinin/nodeenv)
+    # goenv                   # go environment (https://github.com/syndbg/goenv)
+    nodenv                  # node.js version from nodenv (https://github.com/nodenv/nodenv)
+    nvm                     # node.js version from nvm (https://github.com/nvm-sh/nvm)
+    nodeenv                 # node.js environment (https://github.com/ekalinin/nodeenv)
     node_version          # node.js version
-    # go_version            # go version (https://golang.org)
+    go_version            # go version (https://golang.org)
     # rust_version          # rustc version (https://www.rust-lang.org)
     # dotnet_version        # .NET version (https://dotnet.microsoft.com)
     # php_version           # php version (https://www.php.net/)
@@ -92,7 +92,7 @@
     #todo                    # todo items (https://github.com/todotxt/todo.txt-cli)
     #timewarrior             # timewarrior tracking status (https://timewarrior.net/)
     #taskwarrior             # taskwarrior task count (https://taskwarrior.org/)
-    time                  # current time
+     time                  # current time
     # ip                    # ip address and bandwidth usage for a specified network interface
     # public_ip             # public IP address
     # proxy                 # system-wide http/https/ftp proxy
@@ -173,7 +173,7 @@
 
   #################################[ os_icon: os identifier ]##################################
   # OS identifier color.
-  # typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND=' ' 
+  typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND=15
   # Custom icon.
   typeset -g POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION=' '
 
@@ -198,19 +198,19 @@
 
   ##################################[ dir: current directory ]##################################
   # Default current directory color.
-  typeset -g POWERLEVEL9K_DIR_FOREGROUND=4
+  typeset -g POWERLEVEL9K_DIR_FOREGROUND=12
   # If directory is too long, shorten some of its segments to the shortest possible unique
   # prefix. The shortened directory can be tab-completed to the original.
   typeset -g POWERLEVEL9K_SHORTEN_STRATEGY=truncate_to_unique
   # Replace removed segment suffixes with this symbol.
   typeset -g POWERLEVEL9K_SHORTEN_DELIMITER=
   # Color of the shortened directory segments.
-  typeset -g POWERLEVEL9K_DIR_SHORTENED_FOREGROUND=4
+  typeset -g POWERLEVEL9K_DIR_SHORTENED_FOREGROUND=12
   # Color of the anchor directory segments. Anchor segments are never shortened. The first
   # segment is always an anchor.
-  typeset -g POWERLEVEL9K_DIR_ANCHOR_FOREGROUND=4
+  typeset -g POWERLEVEL9K_DIR_ANCHOR_FOREGROUND=12
   # Set to true to display anchor directory segments in bold.
-  typeset -g POWERLEVEL9K_DIR_ANCHOR_BOLD=false
+  typeset -g POWERLEVEL9K_DIR_ANCHOR_BOLD=true
   # Don't shorten directories that contain any of these files. They are anchors.
   local anchor_files=(
     .bzr
@@ -325,7 +325,7 @@
 
   #####################################[ vcs: git status ]######################################
   # Branch icon. Set this parameter to '\uF126 ' for the popular Powerline branch icon.
-  typeset -g POWERLEVEL9K_VCS_BRANCH_ICON=
+  typeset -g POWERLEVEL9K_VCS_BRANCH_ICON='\uF126 '
 
   # Untracked files icon. It's really a question mark, your font isn't broken.
   # Change the value of this parameter to show a different icon.
@@ -955,7 +955,7 @@
 
   #######################[ go_version: go version (https://golang.org) ]########################
   # Go version color.
-  typeset -g POWERLEVEL9K_GO_VERSION_FOREGROUND=6
+  typeset -g POWERLEVEL9K_GO_VERSION_FOREGROUND=4
   # Show go version only when in a go project subdirectory.
   typeset -g POWERLEVEL9K_GO_VERSION_PROJECT_ONLY=true
   # Custom icon.
@@ -1156,7 +1156,7 @@
       # '*prod*'  PROD    # These values are examples that are unlikely
       # '*test*'  TEST    # to match your needs. Customize them as needed.
       '*'       DEFAULT)
-  typeset -g POWERLEVEL9K_KUBECONTEXT_DEFAULT_FOREGROUND=5
+  typeset -g POWERLEVEL9K_KUBECONTEXT_DEFAULT_FOREGROUND=3
   # typeset -g POWERLEVEL9K_KUBECONTEXT_DEFAULT_VISUAL_IDENTIFIER_EXPANSION='⭐'
 
   # Use POWERLEVEL9K_KUBECONTEXT_CONTENT_EXPANSION to specify the content displayed by kubecontext

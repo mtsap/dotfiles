@@ -1,0 +1,61 @@
+[user]
+	name = Michael Tsapanos
+	email = mich.tsap@mgmail.com
+
+[core]
+	compression =  5
+	whitespace = error
+	preloadindex = true
+	pager = delta
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true
+    line-numbers = true
+    syntax-theme = gruvbox-dark
+    side-by-side = true
+    plus-style = "syntax #3a4b2a"
+    minus-style = "syntax #5a2c2c"
+    file-style = bold yellow
+    hunk-header-style = line-number syntax
+
+[merge]
+    conflictstyle = zdiff3
+
+[init]
+	defaultBranch = dev
+
+[status]
+	branch = true
+	showStash = true
+	showUntrackedFiles = true
+
+[push]
+	autoSetupRemote = true
+	default = current
+	followTags = true
+
+[pull]
+	default = current
+
+[log]
+	abbrevCommit = true
+	graphColors = blue,yellow,cyan,magenta,green,red
+
+[branch]
+	sort = -committerdate
+[tag]
+	sort = -taggerdate
+
+[pager]
+	branch = false
+	tag = false
+    diff = delta
+    log = delta
+    reflog = delta
+    show = delta
+    stash = delta
+
+

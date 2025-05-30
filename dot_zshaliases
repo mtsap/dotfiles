@@ -1,3 +1,23 @@
 alias vim='nvim'
-alias ls='exa'
+alias ls='eza'
+alias cat='bat'
+
+alias k='kubectl'
+alias kx='kubectx'
+
+
+alias gs='git status --short'
+alias gch="git checkout"
+alias gd='git diff'
+alias ga='git add'
+alias gap='git add --patch'
+alias gc='git commit'
+alias gp='git pull'
+alias gu='git push'
+alias gl="git log --graph --decorate --all --parents --oneline"
+alias glf="git log --graph --decorate --all --pretty=format:'%C(magenta)%h  %C(cyan)%an  %ar%C(auto) %D%n%s%n'"
+alias gb='git branch'
+alias gi='git init'
+alias gcl='git clone'
+
 

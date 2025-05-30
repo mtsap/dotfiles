@@ -1,0 +1,3 @@
+--theme="gruvbox-dark"
+--style="full"          # Optional: shows line numbers, grid, and headers
+--paging=always 
