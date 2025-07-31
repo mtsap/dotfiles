@@ -3,7 +3,22 @@ local Snacks = require("snacks")
 
 Snacks.setup({
 	bigfile = { enabled = false },
-	dashboard = { enabled = true },
+	dashboard = {
+		enabled = true,
+		sections = {
+			{
+				section = "terminal",
+				cmd = "cat ~/.config/nvim/chafa-banner.txt",
+				height = 17,
+				padding = 1,
+			},
+			{
+				pane = 2,
+				{ section = "keys", gap = 1, padding = 1 },
+				{ section = "startup" },
+			},
+		},
+	},
 	explorer = { enabled = false },
 	indent = { enabled = true },
 	input = {
@@ -48,9 +63,52 @@ Snacks.setup({
 	scroll = { enabled = false },
 	statuscolumn = { enabled = true },
 	words = { enabled = false },
+	zen = { enabled = true },
 	styles = {
 		notification = {
 			-- wo = { wrap = true } -- Wrap notifications
 		},
 	},
 })
+
+vim.keymap.set(Mode.normal, "<leader>ff", function()
+	Snacks.picker.files()
+end, { noremap = true })
+
+vim.keymap.set(Mode.normal, "<leader>fa", function()
+	Snacks.picker.files({
+		ignored = true,
+	})
+end, { noremap = true })
+
+vim.keymap.set(Mode.normal, "<leader>fg", function()
+	Snacks.picker.grep()
+end, { noremap = true })
+
+vim.keymap.set(Mode.normal, "<leader>fb", function()
+	Snacks.picker.buffers()
+end, { noremap = true })
+
+vim.keymap.set(Mode.normal, "<leader>fe", function()
+	Snacks.explorer()
+end, { noremap = true })
+
+vim.keymap.set(Mode.normal, "<leader>fn", function()
+	Snacks.picker.notifications()
+end, { noremap = true })
+
+vim.keymap.set(Mode.normal, "<leader>fnn", function()
+	Snacks.picker.noice()
+end, { noremap = true })
+
+vim.keymap.set(Mode.normal, "<leader>fx", function()
+	Snacks.picker.diagnostics_buffer()
+end, { noremap = true })
+
+vim.keymap.set(Mode.normal, "<leader>fxx", function()
+	Snacks.picker.diagnostics()
+end, { noremap = true })
+
+-- TODO: maybe move lsp stuff to snacks
+-- TODO: config zen!!
+-- TODO: maybe terminal

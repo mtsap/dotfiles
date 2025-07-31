@@ -1,28 +1,46 @@
 local Mode = require("consts").modes
 local fzf = require("fzf-lua")
 
-vim.keymap.set(Mode.normal, "<leader>ff", function()
-	fzf.files()
-end, { noremap = true })
+fzf.setup({
+	winopts = {
+		title_pos = "center",
+		title_flags = false,
+		treesitter = {
+			enable = true,
+		},
+		preview = {
+			scrollbar = "false",
+		},
+	},
+	hls = {},
+	files = {
+		prompt = "❯ ",
+		cwd_prompt = false,
+	},
+})
 
-vim.keymap.set(Mode.normal, "<leader>fa", function()
-	fzf.files({
-		no_ignore = true,
-	})
-end, { noremap = true })
+-- vim.keymap.set(Mode.normal, "<leader>ff", function()
+-- 	fzf.files()
+-- end, { noremap = true })
 
-vim.keymap.set(Mode.normal, "<leader>fg", function()
-	fzf.live_grep_native()
-end, { noremap = true })
+-- vim.keymap.set(Mode.normal, "<leader>fa", function()
+-- 	fzf.files({
+-- 		no_ignore = true,
+-- 	})
+-- end, { noremap = true })
 
-vim.keymap.set(Mode.normal, "<leader>fb", function()
-	fzf.buffers()
-end, { noremap = true })
+-- vim.keymap.set(Mode.normal, "<leader>fg", function()
+-- 	fzf.live_grep_native()
+-- end, { noremap = true })
 
-vim.keymap.set(Mode.normal, "<leader>fb", function()
-	fzf.buffers()
-end, { noremap = true })
+-- vim.keymap.set(Mode.normal, "<leader>fb", function()
+-- 	fzf.buffers()
+-- end, { noremap = true })
 
+-- vim.keymap.set(Mode.normal, "<leader>fb", function()
+-- 	fzf.buffers()
+-- end, { noremap = true })
+--
 -- handled in lspsaga
 -- vim.keymap.set(Mode.normal, "<leader>ca", function()
 -- 	fzf.lsp_code_actions({

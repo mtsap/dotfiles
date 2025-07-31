@@ -17,6 +17,7 @@ require("conform").setup({
 		go = { "gofmt" },
 		sql = { "sleek" },
 		xml = { "xmlformatter" },
+		c = {},
 	},
 	format_on_save = {
 		-- These options will be passed to conform.format()
@@ -25,7 +26,7 @@ require("conform").setup({
 	},
 	formatters = {
 		yamlfmt = {
-			prepend_args = { "-formatter", "retain_line_breaks_single=true" },
+			prepend_args = { "-formatter", "retain_line_breaks_single=true,indent=2,include_document_start=true" },
 		},
 	},
 })

@@ -29,3 +29,4 @@ vim.keymap.set(
 	'p:let @+=@0<CR>:let @"=@0<CR>',
 	{ noremap = true, silent = true, desc = "Don't copy replaced text" }
 )
+vim.keymap.set(mode.visual, "p", "P", { noremap = true, silent = true, desc = "Don't copy replaced text in visual" })

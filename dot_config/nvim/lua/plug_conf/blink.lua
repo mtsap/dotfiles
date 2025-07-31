@@ -15,14 +15,15 @@ require("blink.cmp").setup({
 	keymap = {
 		preset = "default",
 		["<CR>"] = { "accept", "fallback" },
-		["<Tab>"] = { "select_next", "fallback" },
-		["<S-Tab>"] = { "select_prev", "fallback" },
+		-- ["<Tab>"] = { "select_next", "fallback" },
+		-- ["<S-Tab>"] = { "select_prev", "fallback" },
 
 		["<S-k>"] = { "scroll_documentation_up", "fallback" },
 		["<S-j>"] = { "scroll_documentation_down", "fallback" },
 		["<C-k>"] = { "show_signature", "hide_signature", "fallback" },
 
 		["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
+		["<A-space>"] = require("minuet").make_blink_map(),
 	},
 
 	signature = {
@@ -72,7 +73,21 @@ require("blink.cmp").setup({
 	-- elsewhere in your config, without redefining it, due to `opts_extend`
 	sources = {
 		default = { "lsp", "path", "snippets", "buffer" },
+		per_filetype = {
+			sql = { "snippets", "dadbod", "buffer" },
+		},
+		-- default = { "lsp", "path", "snippets", "buffer", "minuet" },
 		providers = {
+			dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
+			minuet = {
+				name = "minuet",
+				module = "minuet.blink",
+				async = true,
+				-- Should match minuet.config.request_timeout * 1000,
+				-- since minuet.config.request_timeout is in seconds
+				timeout_ms = 3000,
+				score_offset = 50, -- Gives minuet higher priority among suggestions
+			},
 			-- lazydev = {
 			-- 	name = "LazyDev",
 			-- 	module = "lazydev.integrations.blink",

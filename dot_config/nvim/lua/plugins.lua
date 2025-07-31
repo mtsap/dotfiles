@@ -64,18 +64,18 @@ local plugins = {
 	-- 	priority = 1000,
 	-- 	config = get_setup("colorschemes.gruvbox_baby"),
 	-- },
-	-- {
-	-- 	"catppuccin/nvim",
-	-- 	name = "catppuccin",
-	-- 	priority = 1000,
-	-- 	config = get_setup("colorschemes.catppuccin"),
-	-- },
 	{
-		"sainnhe/gruvbox-material",
-		lazy = false,
+		"catppuccin/nvim",
+		name = "catppuccin",
 		priority = 1000,
-		config = get_setup("colorschemes.gruvbox_material"),
+		config = get_setup("colorschemes.catppuccin"),
 	},
+	-- {
+	-- 	"sainnhe/gruvbox-material",
+	-- 	lazy = false,
+	-- 	priority = 1000,
+	-- 	config = get_setup("colorschemes.gruvbox_material"),
+	-- },
 	-- {
 	-- 	"sainnhe/everforest",
 	-- 	lazy = false,
@@ -92,16 +92,22 @@ local plugins = {
 		"christoomey/vim-tmux-navigator",
 		lazy = false,
 	},
+	-- {
+	-- 	"nvim-neo-tree/neo-tree.nvim",
+	-- 	dependencies = {
+	-- 		"nvim-lua/plenary.nvim",
+	-- 		"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+	-- 		"MunifTanjim/nui.nvim",
+	-- 		-- {"3rd/image.nvim", opts = {}}, -- Optional image support in preview window: See `# Preview Mode` for more information
+	-- 	},
+	-- 	lazy = false, -- neo-tree will lazily load itself
+	-- 	config = get_setup("neo_tree"),
+	-- },
 	{
-		"nvim-neo-tree/neo-tree.nvim",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-			"MunifTanjim/nui.nvim",
-			-- {"3rd/image.nvim", opts = {}}, -- Optional image support in preview window: See `# Preview Mode` for more information
-		},
-		lazy = false, -- neo-tree will lazily load itself
-		config = get_setup("neo_tree"),
+		"nvimdev/dashboard-nvim",
+		event = "VimEnter",
+		config = get_setup("dashboard"),
+		dependencies = { { "nvim-tree/nvim-web-devicons" } },
 	},
 	{
 		"nvim-treesitter/nvim-treesitter",
@@ -117,17 +123,17 @@ local plugins = {
 		"williamboman/mason.nvim",
 		config = get_setup("mason"),
 	},
-	{
-		"ibhagwan/fzf-lua",
-		dependencies = { "echasnovski/mini.icons", opts = { style = "glyph" } },
-		config = get_setup("fzf"),
-	},
+	-- {
+	-- 	"ibhagwan/fzf-lua",
+	-- 	dependencies = { "echasnovski/mini.icons", opts = { style = "glyph" } },
+	-- 	config = get_setup("fzf"),
+	-- },
 	{
 		"nvim-lualine/lualine.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = get_setup("statusline"),
 	},
-	{ "numToStr/FTerm.nvim", config = get_setup("fterm") },
+	-- { "numToStr/FTerm.nvim", config = get_setup("fterm") },
 	{
 		"folke/snacks.nvim",
 		priority = 1000,
@@ -143,6 +149,19 @@ local plugins = {
 		},
 		config = get_setup("noice"),
 	},
+	{
+		"folke/flash.nvim",
+		event = "VeryLazy",
+		config = get_setup("flash"),
+  -- stylua: ignore
+  keys = {
+    { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+    { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+    { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+    { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+    { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+  },
+	},
 
 	---------------------
 	------- mini --------
@@ -154,9 +173,9 @@ local plugins = {
 		config = get_setup("mini_surround"),
 	},
 	{ "echasnovski/mini.comment", version = false, opts = {} },
-	{ "echasnovski/mini.jump", version = false, config = get_setup("mini_jump") },
-	{ "echasnovski/mini.jump2d", version = false, opts = {} },
-	{ "echasnovski/mini.files", version = false, opts = {} },
+	-- { "echasnovski/mini.jump", version = false, config = get_setup("mini_jump") },
+	-- { "echasnovski/mini.jump2d", version = false, opts = {} },
+	-- { "echasnovski/mini.files", version = false, opts = {} },
 	{ "echasnovski/mini.icons", version = false, opts = { style = "glyph" } },
 	---------------------
 	-------  LSP --------
@@ -234,6 +253,32 @@ local plugins = {
 	},
 
 	---------------------
+	-------  SQL --------
+	---------------------
+	---
+	---
+	{
+		"tpope/vim-dadbod",
+	},
+	{
+		"kristijanhusak/vim-dadbod-ui",
+		dependencies = {
+			{ "tpope/vim-dadbod", lazy = true },
+			{ "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "plsql" }, lazy = true }, -- Optional
+		},
+		cmd = {
+			"DBUI",
+			"DBUIToggle",
+			"DBUIAddConnection",
+			"DBUIFindBuffer",
+		},
+		init = function()
+			-- Your DBUI configuration
+			vim.g.db_ui_use_nerd_fonts = 1
+		end,
+	},
+
+	---------------------
 	-----  Markdown -----
 	---------------------
 	{
@@ -249,21 +294,70 @@ local plugins = {
 	-----  Golang -----
 	---------------------
 	{
-		"ray-x/go.nvim",
-		dependencies = { -- optional packages
-			"ray-x/guihua.lua",
-			"neovim/nvim-lspconfig",
-			"nvim-treesitter/nvim-treesitter",
-		},
-		config = function()
-			require("go").setup()
+		"olexsmir/gopher.nvim",
+		ft = "go",
+		-- branch = "develop"
+		-- (optional) will update plugin's deps on every update
+
+		config = function(_, opts)
+			require("gopher").setup(opts)
 		end,
-		event = { "CmdlineEnter" },
-		ft = { "go", "gomod" },
-		build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
+		build = function()
+			vim.cmd.GoInstallDeps()
+		end,
+		---@type gopher.Config
+	},
+
+	---------------------
+	-----  AI -----
+	---------------------
+	{
+		"milanglacier/minuet-ai.nvim",
+		config = get_setup("minuet"),
+	},
+	{
+		"supermaven-inc/supermaven-nvim",
+		config = function()
+			require("supermaven-nvim").setup({})
+		end,
+	},
+	{
+		"catgoose/nvim-colorizer.lua",
+		cmd = "ColorizerToggle",
+		keys = {
+			{ "<leader>ux", "<cmd>ColorizerToggle<cr>", desc = "Colorizer" },
+		},
+		opts = {},
 	},
 }
 
-local opts = {}
+local opts = {
+	ui = {
+		border = "none", -- border style: "none", "single", "double", "rounded", etc.
+		title = "Lazy", -- Title shown on the dashboard
+		pills = true, -- Show plugin category pills
+
+		icons = {
+			loaded = "✓",
+			not_loaded = "✗",
+		},
+
+		-- Custom dashboard section
+		custom_dashboard = {
+			header = {
+				"██╗      █████╗ ███████╗██╗   ██╗",
+				"██║     ██╔══██╗██╔════╝██║   ██║",
+				"██║     ███████║███████╗██║   ██║",
+				"██║     ██╔══██║╚════██║██║   ██║",
+				"███████╗██║  ██║███████║╚██████╔╝",
+				"╚══════╝╚═╝  ╚═╝╚══════╝ ╚═════╝ ",
+			},
+			footer = {
+				"",
+				"🚀 Happy Hacking with Neovim!",
+			},
+		},
+	},
+}
 
 require("lazy").setup(plugins, opts)

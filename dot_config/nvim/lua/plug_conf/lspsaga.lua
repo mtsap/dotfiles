@@ -2,7 +2,8 @@ local mode = require("consts").modes
 local lspsaga = require("lspsaga")
 lspsaga.setup({
 	finder = {
-		max_height = 0.6,
+		max_height = 1,
+		max_width = 1,
 		keys = {
 			vsplit = "v",
 		},
@@ -22,7 +23,7 @@ vim.keymap.set(mode.normal, "gd", "<cmd>Lspsaga peek_definition<CR>", { noremap 
 
 vim.keymap.set(mode.normal, "<leader>D", "<cmd>Lspsaga peek_type_definition<CR>", { noremap = true, silent = true })
 
-vim.keymap.set(mode.normal, "K", "<cmd>Lspsaga hover_doc<CR>", { noremap = true, silent = true })
+-- vim.keymap.set(mode.normal, "K", "<cmd>Lspsaga hover_doc<CR>", { noremap = true, silent = true })
 
 vim.keymap.set(mode.normal, "gi", "<cmd>Lspsaga finder<CR>", { noremap = true, silent = true })
 
