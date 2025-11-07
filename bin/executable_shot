@@ -1,2 +1,3 @@
 #!/bin/sh
-scrot --select --exec 'mv $f ~/Pictures/Screenshots'
+file=~/Downloads/screenshot_$(date +%Y-%m-%d_%H-%M-%S).png
+grim -g "$(slurp)" "$file" && notify-send "Screenshot saved to $file" && wl-copy < "$file"

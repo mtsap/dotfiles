@@ -74,7 +74,7 @@ require("blink.cmp").setup({
 	sources = {
 		default = { "lsp", "path", "snippets", "buffer" },
 		per_filetype = {
-			sql = { "snippets", "dadbod", "buffer" },
+			sql = { "dadbod", "snippets", "buffer" },
 		},
 		-- default = { "lsp", "path", "snippets", "buffer", "minuet" },
 		providers = {

@@ -3,15 +3,14 @@ require("options")
 require("mappings")
 require("plugins")
 require("consts")
+require("plug_conf/lsp_native")
 -- require("cmds")
 
 -- TODOS:
--- set up sql lsp (maybe dad bod??) and sql access in general
+-- fix lsp with new config for 0.11.5
+-- open code for neovim
+-- explore lazygit
 -- figure out who formats this todo))
--- fzf or snacks or whatever i pick for treesitter/lsp along with lspsaga. maybe more
 -- imporve blink behavior
+-- supermaven
 -- snippets
---
--- ===================
--- ======  AI  =======
--- ===================

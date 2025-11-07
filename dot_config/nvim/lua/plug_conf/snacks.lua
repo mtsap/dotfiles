@@ -19,7 +19,8 @@ Snacks.setup({
 			},
 		},
 	},
-	explorer = { enabled = false },
+	terminal = { enabled = true },
+	explorer = { enabled = true },
 	indent = { enabled = true },
 	input = {
 		enabled = true,
@@ -63,7 +64,20 @@ Snacks.setup({
 	scroll = { enabled = false },
 	statuscolumn = { enabled = true },
 	words = { enabled = false },
-	zen = { enabled = true },
+	zen = {
+		enabled = true,
+		toggles = {
+			dim = true,
+			git_signs = true,
+			mini_diff_signs = true,
+			diagnostics = true,
+			inlay_hints = true,
+		},
+		show = {
+			statusline = false, -- can only be shown when using the global statusline
+			tabline = false,
+		},
+	},
 	styles = {
 		notification = {
 			-- wo = { wrap = true } -- Wrap notifications
@@ -101,14 +115,14 @@ vim.keymap.set(Mode.normal, "<leader>fnn", function()
 	Snacks.picker.noice()
 end, { noremap = true })
 
-vim.keymap.set(Mode.normal, "<leader>fx", function()
+vim.keymap.set(Mode.normal, "<leader>x", function()
 	Snacks.picker.diagnostics_buffer()
 end, { noremap = true })
 
-vim.keymap.set(Mode.normal, "<leader>fxx", function()
+vim.keymap.set(Mode.normal, "<leader>fx", function()
 	Snacks.picker.diagnostics()
 end, { noremap = true })
 
--- TODO: maybe move lsp stuff to snacks
--- TODO: config zen!!
--- TODO: maybe terminal
+vim.keymap.set(Mode.normal, "<leader>z", function()
+	Snacks.zen()
+end, { noremap = true })

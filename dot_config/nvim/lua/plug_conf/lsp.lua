@@ -1,5 +1,4 @@
-local lspconfig = require("lspconfig")
-local util = require("lspconfig/util")
+-- local util = require("lspconfig/util")
 local mode = require("consts").modes
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -21,17 +20,25 @@ capabilities.textDocument.completion.completionItem = {
 	},
 }
 
+local function on_attach(client, bufnr)
+	local opts = { noremap = true, silent = true, buffer = bufnr }
+	vim.keymap.set(mode.normal, "K", function()
+		vim.lsp.buf.hover({ border = "single" })
+	end, { noremap = true, silent = true })
+end
+
 -- if you just want default config for the servers then put them in a table
 local servers = { "html", "cssls", "ts_ls", "clangd", "lua_ls" }
 
 for _, lsp in ipairs(servers) do
-	lspconfig[lsp].setup({
+	vim.lsp.config(lsp, {
+
 		on_attach = on_attach,
 		capabilities = capabilities,
 	})
 end
 
-lspconfig.yamlls.setup({
+vim.lsp.config("yamlls", {
 	on_attach = on_attach,
 	capabilities = capabilities,
 	settings = {
@@ -65,12 +72,12 @@ lspconfig.yamlls.setup({
 	},
 })
 
-lspconfig.gopls.setup({
+vim.lsp.config("gopls", {
 	on_attach = on_attach,
 	capabilities = capabilities,
 	cmd = { "gopls" },
 	filetypes = { "go", "gomod", "gowork", "gotmpl" },
-	root_dir = util.root_pattern("go.work", "go.mod", ".git"),
+	-- root_dir = util.root_pattern("go.work", "go.mod", ".git"),
 	settings = {
 		gopls = {
 			completeUnimported = true,
@@ -79,11 +86,11 @@ lspconfig.gopls.setup({
 	},
 })
 
-lspconfig.rust_analyzer.setup({
+vim.lsp.config("rust_analyzer", {
 	on_attach = on_attach,
 	capabilities = capabilities,
 	filetypes = { "rust" },
-	root_dir = util.root_pattern("Cargo.toml"),
+	-- root_dir = util.root_pattern("Cargo.toml"),
 
 	settings = {
 		cargo = {
@@ -111,7 +118,7 @@ lspconfig.rust_analyzer.setup({
 	},
 })
 
-lspconfig.jsonls.setup({})
+vim.lsp.config("jsonls", {})
 
 local border = {
 	{ "🭽", "MyFloatBorder" },
@@ -147,9 +154,6 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
 -- 	vim.lsp.buf.type_definition()
 -- end, { noremap = true, silent = true })
 --
-vim.keymap.set(mode.normal, "K", function()
-	vim.lsp.buf.hover({ border = "single" })
-end, { noremap = true, silent = true })
 --
 -- vim.keymap.set(mode.normal, "gi", function()
 -- 	vim.lsp.buf.implementation()
@@ -178,3 +182,4 @@ end, { noremap = true, silent = true })
 -- vim.keymap.set(mode.normal, "<leader>q", function()
 -- 	vim.diagnostic.setloclist()
 -- end, { noremap = true, silent = true })
+vim.lsp.enable()
