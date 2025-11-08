@@ -1,0 +1,15 @@
+return {
+	cmd = { "gopls", "-remote=auto" },
+	filetypes = { "go", "gomod", "gowork", "gotmpl" },
+	root_markers = { "go.work", "go.mod", ".git" },
+	settings = {
+		gopls = {
+			completeUnimported = true,
+			usePlaceholders = true,
+			analyses = {
+				unusedparams = true,
+				unreachable = true,
+			},
+		},
+	},
+}
