@@ -1,0 +1,3 @@
+#!/bin/sh
+
+cd ~/.local/share/chezmoi/ && git add --all && git commit -m "update config" && git push
