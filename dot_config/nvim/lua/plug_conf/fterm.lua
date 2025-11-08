@@ -1,4 +1,4 @@
-local Mode = require("consts").modes
+local Mode = require("config.consts").modes
 local fterm = require("FTerm")
 fterm.setup({
 	border = "rounded",

@@ -19,7 +19,7 @@ require("noice").setup({
 		long_message_to_split = true,
 		long_message_to_split = true, -- long messages will be sent to a split
 		inc_rename = false, -- enables an input dialog for inc-rename.nvim
-		lsp_doc_border = false, -- add a border to hover docs and signature help
+		lsp_doc_border = true, -- add a border to hover docs and signature help
 	},
 	cmdline = {
 		enabled = true, -- enables the Noice cmdline UI
@@ -40,7 +40,7 @@ require("noice").setup({
 				col = "50%",
 			},
 			win_options = {
-				winhighlight = "NoiceCmdlineIcon:MineGreyBg2,Cursor:MineYellowFg,FloatBorder:MineYellowFg,Title:MineYellowFg,Normal:MineGreyBg",
+				winhighlight = "NoiceCmdlineIcon:MineGreyBg2,Cursor:MineYellowFg,FloatBorder:FloatBorder,Title:MineYellowFg,Normal:MineGreyBg",
 			},
 		}, -- global options for the cmdline. See section on views
 		---@type table<string, CmdlineFormat>
@@ -83,19 +83,42 @@ require("noice").setup({
 		kind_icons = {}, -- set to `false` to disable icons
 	},
 	lsp = {
+		-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+		override = {
+			["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+			["vim.lsp.util.stylize_markdown"] = true,
+			["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
+		},
+
 		hover = {
-			enabled = false,
+			enabled = true,
+			view = "hover", -- you can change this to another view if you want
+			opts = {
+				-- options go here
+				border = {
+					style = "rounded", -- or "single", "double", "solid", etc
+				},
+				padding = { 1, 2 },
+				win_options = {
+					winhighlight = {
+						Normal = "NormalFloat",
+						FloatBorder = "FloatBorder",
+					},
+					-- e.g. hide cursorline, change conceallevel, etc
+					concealcursor = "n",
+					conceallevel = 3,
+				},
+				size = {
+					max_width = 80,
+					max_height = 20,
+					width = "auto",
+					height = "auto",
+				},
+			},
 		},
 		signature = {
-			enabled = false,
+			enabled = true,
+			view = "hover",
 		},
 	},
 })
-
-vim.api.nvim_set_hl(0, "MineRedBg", { bg = "#fb4934", fg = "#282828" })
-vim.api.nvim_set_hl(0, "MineRedFg", { bg = "#00ff00", fg = "#0000ff" })
-vim.api.nvim_set_hl(0, "MineYellowBg", { bg = "#fabd2f", fg = "#282828" })
-vim.api.nvim_set_hl(0, "MineBlackBg", { bg = "#282828", fg = "#282828" })
-vim.api.nvim_set_hl(0, "MineGreyBg", { bg = "#232323", fg = "#fbf1c7" })
-vim.api.nvim_set_hl(0, "MineGreyBg2", { bg = "#232323", fg = "#fb4934" })
-vim.api.nvim_set_hl(0, "MineYellowFg", { bg = "#282828", fg = "#fabd2f" })

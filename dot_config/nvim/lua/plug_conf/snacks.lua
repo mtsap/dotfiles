@@ -1,4 +1,4 @@
-local Mode = require("consts").modes
+local Mode = require("config.consts").modes
 local Snacks = require("snacks")
 
 Snacks.setup({
@@ -58,7 +58,7 @@ Snacks.setup({
 		more_format = " ↓ %d lines ",
 		refresh = 50, -- refresh at most every 50ms
 	},
-	picker = { enabled = true },
+	picker = { enabled = true, prompt = "|> " },
 	quickfile = { enabled = false },
 	scope = { enabled = false },
 	scroll = { enabled = false },
@@ -117,10 +117,6 @@ end, { noremap = true })
 
 vim.keymap.set(Mode.normal, "<leader>x", function()
 	Snacks.picker.diagnostics_buffer()
-end, { noremap = true })
-
-vim.keymap.set(Mode.normal, "<leader>fx", function()
-	Snacks.picker.diagnostics()
 end, { noremap = true })
 
 vim.keymap.set(Mode.normal, "<leader>z", function()

@@ -23,11 +23,11 @@ require("blink.cmp").setup({
 		["<C-k>"] = { "show_signature", "hide_signature", "fallback" },
 
 		["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
-		["<A-space>"] = require("minuet").make_blink_map(),
 	},
 
+	-- handled by noice
 	signature = {
-		enabled = true,
+		enabled = false,
 		window = { border = "rounded" },
 	},
 
@@ -79,15 +79,6 @@ require("blink.cmp").setup({
 		-- default = { "lsp", "path", "snippets", "buffer", "minuet" },
 		providers = {
 			dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
-			minuet = {
-				name = "minuet",
-				module = "minuet.blink",
-				async = true,
-				-- Should match minuet.config.request_timeout * 1000,
-				-- since minuet.config.request_timeout is in seconds
-				timeout_ms = 3000,
-				score_offset = 50, -- Gives minuet higher priority among suggestions
-			},
 			-- lazydev = {
 			-- 	name = "LazyDev",
 			-- 	module = "lazydev.integrations.blink",

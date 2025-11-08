@@ -1,16 +1,14 @@
 -- require("autocmds")
-require("options")
-require("mappings")
-require("plugins")
-require("consts")
-require("plug_conf/lsp_native")
+require("config.options")
+require("config.mappings")
+require("config.plugins")
+require("config.consts")
+require("config.highlights")
+require("core.lsp")
 -- require("cmds")
 
 -- TODOS:
--- fix lsp with new config for 0.11.5
--- open code for neovim
--- explore lazygit
--- figure out who formats this todo))
+-- open code for neovim - learn to use it
 -- imporve blink behavior
 -- supermaven
 -- snippets
