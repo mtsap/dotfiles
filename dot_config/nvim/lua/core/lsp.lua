@@ -63,8 +63,8 @@ capabilities.textDocument.completion.completionItem = {
 -- Enable the servers
 vim.lsp.enable({
 	-- "vtsls",
-	-- "ts_ls",
-	"tsgo",
+	"ts_ls",
+	-- "tsgo",
 	-- "lua_ls",
 	-- "clangd",
 	-- "html",
@@ -81,8 +81,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		end
 
 		map("gl", vim.diagnostic.open_float, "Open Diagnostic Float")
-		map("[d", vim.diagnostic.goto_prev, "Diagnostic Next")
-		map("]d", vim.diagnostic.goto_next, "Diagnostic Prev")
+		map("<leader>gj", vim.diagnostic.goto_prev, "Diagnostic Next")
+		map("<leader>gk", vim.diagnostic.goto_next, "Diagnostic Prev")
 		map("<leader>fx", require("snacks").picker.diagnostics, "Diagnostic")
 		map("<leader>x", require("snacks").picker.diagnostics_buffer, "Buffer Diagnostic")
 

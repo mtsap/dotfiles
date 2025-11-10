@@ -2,6 +2,9 @@ local Mode = require("config.consts").modes
 local Snacks = require("snacks")
 
 Snacks.setup({
+	lazygit = {
+		configure = true,
+	},
 	bigfile = { enabled = false },
 	dashboard = {
 		enabled = true,
@@ -115,10 +118,10 @@ vim.keymap.set(Mode.normal, "<leader>fnn", function()
 	Snacks.picker.noice()
 end, { noremap = true })
 
-vim.keymap.set(Mode.normal, "<leader>x", function()
-	Snacks.picker.diagnostics_buffer()
-end, { noremap = true })
-
 vim.keymap.set(Mode.normal, "<leader>z", function()
 	Snacks.zen()
+end, { noremap = true })
+
+vim.keymap.set(Mode.normal, "<leader>lg", function()
+	Snacks.lazygit()
 end, { noremap = true })

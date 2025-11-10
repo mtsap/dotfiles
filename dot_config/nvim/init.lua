@@ -4,6 +4,7 @@ require("config.mappings")
 require("config.plugins")
 require("config.consts")
 require("config.highlights")
+require("config.multi_build")
 require("core.lsp")
 -- require("cmds")
 

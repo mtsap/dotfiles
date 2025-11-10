@@ -1,6 +1,7 @@
 vim.g.mapleader = " "
 
 local mode = require("config.consts").modes
+local multi_ts_build = require("config.multi_build")
 
 opts = { noremap = true, silent = true }
 
@@ -30,3 +31,7 @@ vim.keymap.set(
 	{ noremap = true, silent = true, desc = "Don't copy replaced text" }
 )
 vim.keymap.set(mode.visual, "p", "P", { noremap = true, silent = true, desc = "Don't copy replaced text in visual" })
+
+vim.keymap.set("n", "<leader>b", multi_ts_build.build_all_projects, {
+	desc = "Build all configured TS projects",
+})
