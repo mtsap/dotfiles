@@ -106,6 +106,15 @@ local plugins = {
 		config = get_setup("snacks"),
 	},
 	{
+		"dzfrias/arena.nvim",
+		event = "BufWinEnter",
+		-- Calls `.setup()` automatically
+		config = true,
+		keys = {
+			{ "<leader>fb", "<cmd>lua require('arena').toggle()<cr>", desc = "Arena" },
+		},
+	},
+	{
 		"folke/noice.nvim",
 		event = "VeryLazy",
 		dependencies = {
@@ -165,17 +174,28 @@ local plugins = {
 	---------------------
 	------- mini --------
 	---------------------
-	{ "echasnovski/mini.pairs", version = "*", opts = {} },
+	{ "nvim-mini/mini.pairs", version = "*" },
 	{
-		"echasnovski/mini.surround",
+		"nvim-mini/mini.surround",
 		version = "*",
-		config = get_setup("mini_surround"),
+		event = "VeryLazy",
+		config = function()
+			require("mini.surround").setup({
+				mappings = {
+					add = "ys",
+					delete = "sd",
+					find = "sf",
+					find_left = "sF",
+					highlight = "sh",
+					replace = "sr",
+					update_n_lines = "sn",
+				},
+				search_method = "cover",
+			})
+		end,
 	},
-	{ "echasnovski/mini.comment", version = false, opts = {} },
-	-- { "echasnovski/mini.jump", version = false, config = get_setup("mini_jump") },
-	-- { "echasnovski/mini.jump2d", version = false, opts = {} },
-	-- { "echasnovski/mini.files", version = false, opts = {} },
-	{ "echasnovski/mini.icons", version = false, opts = { style = "glyph" } },
+	{ "nvim-mini/mini.comment", version = "*" },
+	{ "nvim-mini/mini.icons", version = "*" },
 	---------------------
 	-------  LSP --------
 	---------------------
@@ -206,23 +226,23 @@ local plugins = {
 	-- 		"nvim-tree/nvim-web-devicons", -- optional
 	-- 	},
 	-- },
-	-- {
-	-- 	"folke/trouble.nvim",
-	-- 	opts = {},
-	-- 	cmd = "Trouble",
-	-- 	keys = {
-	-- 		{
-	-- 			"<leader>xx",
-	-- 			"<cmd>Trouble diagnostics toggle<cr>",
-	-- 			desc = "Diagnostics (Trouble)",
-	-- 		},
-	-- 		{
-	-- 			"<leader>xX",
-	-- 			"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-	-- 			desc = "Buffer Diagnostics (Trouble)",
-	-- 		},
-	-- 	},
-	-- },
+	{
+		"folke/trouble.nvim",
+		opts = {},
+		cmd = "Trouble",
+		keys = {
+			{
+				"<leader>xx",
+				"<cmd>Trouble diagnostics toggle<cr>",
+				desc = "Diagnostics (Trouble)",
+			},
+			{
+				"<leader>xX",
+				"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+				desc = "Buffer Diagnostics (Trouble)",
+			},
+		},
+	},
 
 	---------------------
 	-------  GIT --------
@@ -297,11 +317,22 @@ local plugins = {
 	---------------------
 	{
 		"MeanderingProgrammer/render-markdown.nvim",
-		dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.icons" }, -- if you use standalone mini plugins
+		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-mini/mini.icons" }, -- if you use standalone mini plugins
 		-- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
 		---@module 'render-markdown'
 		---@type render.md.UserConfig
 		opts = {},
+	},
+
+	---------------------
+	-----  NODE -----
+	---------------------
+	{
+		"vuki656/package-info.nvim",
+		dependencies = {
+			"MunifTanjim/nui.nvim",
+		},
+		config = get_setup("package-info"),
 	},
 
 	---------------------

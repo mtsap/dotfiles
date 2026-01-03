@@ -68,17 +68,29 @@ Snacks.setup({
 	statuscolumn = { enabled = true },
 	words = { enabled = false },
 	zen = {
+		style = {
+			width = 300,
+		},
+		win = {
+			width = 0.6, -- 85% of the total editor width
+		},
 		enabled = true,
 		toggles = {
-			dim = true,
+			dim = false,
 			git_signs = true,
 			mini_diff_signs = true,
 			diagnostics = true,
 			inlay_hints = true,
 		},
 		show = {
-			statusline = false, -- can only be shown when using the global statusline
+			statusline = true, -- can only be shown when using the global statusline
 			tabline = false,
+		},
+		zoom = {
+			win = {
+				backdrop = false,
+				width = 0.9,
+			},
 		},
 	},
 	styles = {
@@ -102,9 +114,9 @@ vim.keymap.set(Mode.normal, "<leader>fg", function()
 	Snacks.picker.grep()
 end, { noremap = true })
 
-vim.keymap.set(Mode.normal, "<leader>fb", function()
-	Snacks.picker.buffers()
-end, { noremap = true })
+-- vim.keymap.set(Mode.normal, "<leader>fb", function()
+-- 	Snacks.picker.buffers()
+-- end, { noremap = true })
 
 vim.keymap.set(Mode.normal, "<leader>fe", function()
 	Snacks.explorer()

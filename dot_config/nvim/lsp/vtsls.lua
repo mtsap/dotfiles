@@ -3,22 +3,39 @@ return {
 	filetypes = {
 		"typescript",
 		"typescriptreact",
-		"typescript.tsx",
 		"javascript",
 		"javascriptreact",
-		"javascript.jsx",
 	},
-	root_markers = { ".git" },
+	root_markers = {
+		".git",
+		"pnpm-workspace.yaml",
+		"lerna.json",
+		"turbo.json",
+		"nx.json",
+	},
 
 	settings = {
 		typescript = {
 			updateImportsOnFileMove = "always",
+			tsserver = {
+				experimental = {
+					enableProjectDiagnostics = true,
+				},
+			},
 		},
 		javascript = {
 			updateImportsOnFileMove = "always",
 		},
 		vtsls = {
 			enableMoveToFileCodeAction = true,
+		},
+	},
+	vtsls = {
+		autoUseWorkspaceTsdk = true, -- uses your project's local typescript
+		experimental = {
+			completion = {
+				enableServerSideFuzzyMatch = true,
+			},
 		},
 	},
 }
