@@ -63,14 +63,15 @@ capabilities.textDocument.completion.completionItem = {
 -- Enable the servers
 vim.lsp.enable({
 	-- "vtsls",
-	-- "ts_ls",
-	"tsgo",
+	"ts_ls",
+	-- "tsgo",
 	-- "lua_ls",
 	-- "clangd",
 	-- "html",
 	-- "cssls",
 	"gopls",
 	"biome",
+	"basedpyright",
 })
 
 vim.api.nvim_create_autocmd("LspAttach", {

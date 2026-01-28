@@ -18,6 +18,7 @@ require("conform").setup({
 		go = { "gofmt" },
 		sql = { "sleek" },
 		xml = { "xmlformatter" },
+		python = { "isort", "black" },
 		c = {},
 	},
 	format_on_save = {
