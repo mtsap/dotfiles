@@ -61,7 +61,15 @@ Snacks.setup({
 		more_format = " ↓ %d lines ",
 		refresh = 50, -- refresh at most every 50ms
 	},
-	picker = { enabled = true, prompt = "|> " },
+	picker = {
+		enabled = true,
+		prompt = "|> ",
+		sources = {
+			files = { hidden = true, ignored = false },
+			grep = { hidden = true, ignored = false },
+			explorer = { hidden = true, ignored = false },
+		},
+	},
 	quickfile = { enabled = false },
 	scope = { enabled = false },
 	scroll = { enabled = false },
