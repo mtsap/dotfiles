@@ -80,13 +80,23 @@ local plugins = {
 			"TmuxNavigatePrevious",
 			"TmuxNavigatorProcessList",
 		},
-		-- keys = {
-		-- 	{ "<c-h>", "<cmd><C-U>TmuxNavigateLeft<cr>" },
-		-- 	{ "<c-j>", "<cmd><C-U>TmuxNavigateDown<cr>" },
-		-- 	{ "<c-k>", "<cmd><C-U>TmuxNavigateUp<cr>" },
-		-- 	{ "<c-l>", "<cmd><C-U>TmuxNavigateRight<cr>" },
-		-- 	{ "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
-		-- },
+		init = function()
+			-- Reusable function to register keymaps in different contexts
+			local function set_keymaps()
+				vim.keymap.set({ "n", "t", "v" }, "<C-h>", "<cmd>TmuxNavigateLeft<cr>")
+				vim.keymap.set({ "n", "t", "v" }, "<C-j>", "<cmd>TmuxNavigateDown<cr>")
+				vim.keymap.set({ "n", "t", "v" }, "<C-k>", "<cmd>TmuxNavigateUp<cr>")
+				vim.keymap.set({ "n", "t", "v" }, "<C-l>", "<cmd>TmuxNavigateRight<cr>")
+			end
+
+			-- Register once globally
+			set_keymaps()
+
+			-- Re-register for terminal buffers to prevent literal command injection
+			vim.api.nvim_create_autocmd("TermOpen", {
+				callback = set_keymaps,
+			})
+		end,
 	},
 	{
 		"nvimdev/dashboard-nvim",
@@ -376,31 +386,6 @@ local plugins = {
 			require("supermaven-nvim").setup({})
 		end,
 	},
-	-- {
-	-- 	"sudo-tee/opencode.nvim",
-	-- 	config = get_setup("opencode"),
-	-- 	lazy = false,
-	-- 	dependencies = {
-	-- 		"nvim-lua/plenary.nvim",
-	-- 		{
-	-- 			"MeanderingProgrammer/render-markdown.nvim",
-	-- 			opts = {
-	-- 				anti_conceal = { enabled = false },
-	-- 				file_types = { "markdown", "opencode_output" },
-	-- 			},
-	-- 			ft = { "markdown", "Avante", "copilot-chat", "opencode_output" },
-	-- 		},
-	-- 		-- Optional, for file mentions and commands completion, pick only one
-	-- 		"saghen/blink.cmp",
-	-- 		-- 'hrsh7th/nvim-cmp',
-	--
-	-- 		-- Optional, for file mentions picker, pick only one
-	-- 		"folke/snacks.nvim",
-	-- 		-- 'nvim-telescope/telescope.nvim',
-	-- 		-- 'ibhagwan/fzf-lua',
-	-- 		-- 'nvim_mini/mini.nvim',
-	-- 	},
-	-- },
 	{
 		"NickvanDyke/opencode.nvim",
 		dependencies = {
@@ -409,47 +394,7 @@ local plugins = {
 			---@module 'snacks' <- Loads `snacks.nvim` types for configuration intellisense.
 			{ "folke/snacks.nvim", opts = { input = {}, picker = {}, terminal = {} } },
 		},
-		config = function()
-			---@type opencode.Opts
-			vim.g.opencode_opts = {
-				-- Your configuration, if any — see `lua/opencode/config.lua`, or "goto definition".
-				provider = {
-					enabled = "tmux",
-				},
-			}
-
-			-- Required for `opts.events.reload`.
-			vim.o.autoread = true
-
-			-- Recommended/example keymaps.
-			vim.keymap.set({ "n", "x" }, "<leader>a", function()
-				require("opencode").ask("@this: ", { submit = true })
-			end, { desc = "Ask opencode" })
-			vim.keymap.set({ "n", "x" }, "<leader>as", function()
-				require("opencode").select()
-			end, { desc = "Execute opencode action…" })
-			vim.keymap.set({ "n", "x" }, "<leader>ay", function()
-				require("opencode").toggle()
-			end, { desc = "Toggle opencode" })
-
-			vim.keymap.set({ "n", "x" }, "go", function()
-				return require("opencode").operator("@this ")
-			end, { expr = true, desc = "Add range to opencode" })
-			vim.keymap.set("n", "goo", function()
-				return require("opencode").operator("@this ") .. "_"
-			end, { expr = true, desc = "Add line to opencode" })
-
-			vim.keymap.set("t", "<C-u>", function()
-				require("opencode").command("session.half.page.up")
-			end, { desc = "opencode half page up" })
-			vim.keymap.set("t", "<C-d>", function()
-				require("opencode").command("session.half.page.down")
-			end, { desc = "opencode half page down" })
-
-			-- You may want these if you stick with the opinionated "<C-a>" and "<C-x>" above — otherwise consider "<leader>o".
-			vim.keymap.set("n", "+", "<C-a>", { desc = "Increment", noremap = true })
-			vim.keymap.set("n", "-", "<C-x>", { desc = "Decrement", noremap = true })
-		end,
+		config = get_setup("opencode"),
 	},
 	{
 		"catgoose/nvim-colorizer.lua",

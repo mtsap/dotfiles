@@ -36,27 +36,27 @@ vim.keymap.set("n", "<leader>b", multi_ts_build.build_all_projects, {
 	desc = "Build all configured TS projects",
 })
 
-vim.keymap.set(
-	{ mode.normal, mode.visual, mode.terminal },
-	"<C-h>",
-	"<cmd>TmuxNavigateLeft<cr>",
-	{ desc = "skip left pane" }
-)
-vim.keymap.set(
-	{ mode.normal, mode.visual, mode.terminal },
-	"<C-j>",
-	"<cmd>TmuxNavigateDown<cr>",
-	{ desc = "skip down pane" }
-)
-vim.keymap.set(
-	{ mode.normal, mode.visual, mode.terminal },
-	"<C-k>",
-	"<cmd>TmuxNavigateUp<cr>",
-	{ desc = "skip up pane" }
-)
-vim.keymap.set(
-	{ mode.normal, mode.visual, mode.terminal },
-	"<C-l>",
-	"<cmd>TmuxNavigateRight<cr>",
-	{ desc = "skip right pane" }
-)
+-- vim.keymap.set(
+-- 	{ mode.normal, mode.visual, mode.terminal },
+-- 	"<C-h>",
+-- 	"<cmd>TmuxNavigateLeft<cr>",
+-- 	{ desc = "skip left pane" }
+-- )
+-- vim.keymap.set(
+-- 	{ mode.normal, mode.visual, mode.terminal },
+-- 	"<C-j>",
+-- 	"<cmd>TmuxNavigateDown<cr>",
+-- 	{ desc = "skip down pane" }
+-- )
+-- vim.keymap.set(
+-- 	{ mode.normal, mode.visual, mode.terminal },
+-- 	"<C-k>",
+-- 	"<cmd>TmuxNavigateUp<cr>",
+-- 	{ desc = "skip up pane" }
+-- )
+-- vim.keymap.set(
+-- 	{ mode.normal, mode.visual, mode.terminal },
+-- 	"<C-l>",
+-- 	"<cmd>TmuxNavigateRight<cr>",
+-- 	{ desc = "skip right pane" }
+-- )
