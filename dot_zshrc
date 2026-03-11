@@ -17,64 +17,126 @@ unsetopt beep
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/mtsap/.zshrc'
 
-fpath=($HOME/.oh-my-zsh/completions $fpath)
-autoload -Uz compinit
-compinit
-
-plugins=(git extract vi-mode safe-paste node npm nvm fzf-tab rust)
+plugins=(zsh-pnpm-completions git extract vi-mode safe-paste node fzf-tab rust zsh-syntax-highlighting zsh-completions)
 source $ZSH/oh-my-zsh.sh
-
 # End of lines added by compinstall
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
-
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-# General config    
+# General config
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
 
 # FZF config
-export FZF_DEFAULT_OPTS='--height 33% --border -m --bind="\\:toggle-preview" --preview-window right:50% --preview "[[ $(file --mime {}) =~ binary ]] && echo {} is a binary file || (bat --theme=gruvbox --style=numbers --color=always {} || cat {}) 2> /dev/null | head -200"'
-export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+# export FZF_DEFAULT_OPTS=' --border -m --bind="\\:toggle-preview" --preview-window right:50% --preview "[[ $(file --mime {}) =~ binary ]] && echo {} is a binary file || (bat --theme=gruvbox --style=numbers --color=always {} || cat {}) 2> /dev/null | head -200"'
+# export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+
+### ==========================================
+### FZF — appearance (Gruvbox theme)
+### ==========================================
+
+export FZF_DEFAULT_OPTS="
+  --height=50%
+  --layout=reverse
+  --border
+  --inline-info
+  --info=inline
+  --cycle
+  --scroll-off=3
+  --tabstop=4
+
+  # Gruvbox colors
+  --color=bg+:#3c3836,bg:#282828,fg:#ebdbb2,hl:#fb4934
+  --color=fg+:#ebdbb2,header:#fabd2f,info:#83a598
+  --color=border:#665c54,prompt:#fe8019,spinner:#fb4934
+  --color=pointer:#fb4934,marker:#b8bb26
+"
+
+# Optional: fuzzy commands
+export FZF_CTRL_T_COMMAND="fd --type f --hidden --follow --exclude .git"
+export FZF_ALT_C_COMMAND="fd --type d --hidden --follow --exclude .git"
+
+### ==========================================
+### FZF-TAB — appearance + layout
+### ==========================================
+
+zstyle ':fzf-tab:*' popup-border rounded
+zstyle ':fzf-tab:*' popup-pad '7 2'
+
+zstyle ':fzf-tab:*' fzf-flags \
+  --height=80% \
+  --border \
+  --layout=reverse \
+  --info=inline \
+  --prompt=' ' \
+  --marker='● ' \
+  --pointer='▶ ' \
+  --cycle
+
+zstyle ':fzf-tab:*' switch-group 'ctrl-h' 'ctrl-l'
+zstyle ':fzf-tab:*' group-colors "fg=yellow" "fg=green" "fg=cyan"
+
+zstyle ':completion:*' list-colors ''
+zstyle ':fzf-tab:*' prefix ''
+
+
+### ==========================================
+### FZF-TAB — preview using bat + eza
+### ==========================================
+
+# Default preview: directory = eza, file = bat
+zstyle ':fzf-tab:*' fzf-preview '
+  if [[ -d $realpath ]]; then
+      eza --color=always --icons --tree --level=2 $realpath | head -200
+  else
+      bat --color=always --style=plain --paging=never $realpath 2>/dev/null \
+      || less $realpath
+  fi
+'
+
+# kill command preview
+zstyle ':fzf-tab:complete:kill:*' fzf-preview 'ps -f -p $word'
+
+# cd preview (using eza)
+zstyle ':fzf-tab:complete:cd:*' fzf-preview \
+  'eza --color=always --icons --tree --level=2 $realpath | head -200'
+
+# git checkout preview
+zstyle ':fzf-tab:complete:git-checkout:*' fzf-preview \
+  'git show --color=always $word 2>/dev/null || git branch --color=always'
+
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
-
-
 # eval $(keychain --eval --quiet ~/.ssh/id_bitbucket) 
-
 # source $HOME/.zshfnm
 source /usr/share/nvm/init-nvm.sh
 #aliases
 source ~/.zshaliases
 # zsh syntax highlight
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /home/mtsap/.zshjdk15
 source /home/mtsap/.zshandroid
 if [[ -f "/home/mtsap/.zshwork" ]]; then
-  source /home/mtsap/.zshwork
+source /home/mtsap/.zshwork
 fi
 
+[ -f ~/.config/zsh/worktrunk.zsh ] && source ~/.config/zsh/worktrunk.zsh
 
 #[ -s "/home/mtsap/.jabba/jabba.sh" ] && source "/home/mtsap/.jabba/jabba.sh"
-
 #add ghcup to path
 # export PATH="$HOME/.cabal/bin:${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/bin:$PATH"
-
 # tabtab source for packages
 # uninstall by removing these lines
 [[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
-
 # bun completions
 [ -s "/home/mtsap/.bun/_bun" ] && source "/home/mtsap/.bun/_bun"
-
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
-
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/home/mtsap/bin/google-cloud-sdk/path.zsh.inc' ]; then . '/home/mtsap/bin/google-cloud-sdk/path.zsh.inc'; fi
-
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/mtsap/bin/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/mtsap/bin/google-cloud-sdk/completion.zsh.inc'; fi
+
+if command -v wt >/dev/null 2>&1; then eval "$(command wt config shell init zsh)"; fi
