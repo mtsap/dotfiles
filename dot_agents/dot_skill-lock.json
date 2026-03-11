@@ -1,0 +1,63 @@
+{
+  "version": 3,
+  "skills": {
+    "upgrading-expo": {
+      "source": "expo/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/expo/skills.git",
+      "skillPath": "plugins/upgrading-expo/skills/upgrading-expo/SKILL.md",
+      "skillFolderHash": "cfcc9ba12542031f7332426e2eb1ccf38c113c5e",
+      "installedAt": "2026-03-02T11:25:27.863Z",
+      "updatedAt": "2026-03-02T11:25:27.863Z"
+    },
+    "find-skills": {
+      "source": "vercel-labs/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/vercel-labs/skills.git",
+      "skillPath": "skills/find-skills/SKILL.md",
+      "skillFolderHash": "c2f31172b6f256272305a5e6e7228b258446899f",
+      "installedAt": "2026-03-02T11:25:39.860Z",
+      "updatedAt": "2026-03-02T11:25:39.860Z"
+    },
+    "writing-clearly-and-concisely": {
+      "source": "softaworks/agent-toolkit",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/softaworks/agent-toolkit.git",
+      "skillPath": "skills/writing-clearly-and-concisely/SKILL.md",
+      "skillFolderHash": "4bb2d919b567277219f7a18358bd05e0a1679a77",
+      "installedAt": "2026-03-10T20:47:58.729Z",
+      "updatedAt": "2026-03-10T20:47:58.729Z"
+    },
+    "building-native-ui": {
+      "source": "expo/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/expo/skills.git",
+      "skillPath": "plugins/expo-app-design/skills/building-native-ui/SKILL.md",
+      "skillFolderHash": "0078663cbdc42e388d2eb9c291dda1a0774eee29",
+      "installedAt": "2026-03-10T21:00:16.594Z",
+      "updatedAt": "2026-03-10T21:00:16.594Z"
+    },
+    "native-data-fetching": {
+      "source": "expo/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/expo/skills.git",
+      "skillPath": "plugins/expo-app-design/skills/native-data-fetching/SKILL.md",
+      "skillFolderHash": "43d26c96331a2240e33d319998d21da4191b5587",
+      "installedAt": "2026-03-10T21:01:08.905Z",
+      "updatedAt": "2026-03-10T21:01:08.905Z"
+    }
+  },
+  "dismissed": {
+    "findSkillsPrompt": true
+  },
+  "lastSelectedAgents": [
+    "amp",
+    "cline",
+    "codex",
+    "cursor",
+    "gemini-cli",
+    "github-copilot",
+    "kimi-cli",
+    "opencode"
+  ]
+}
