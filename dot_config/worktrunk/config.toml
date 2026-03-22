@@ -1,0 +1,48 @@
+skip-commit-generation-prompt = true
+
+
+[post-create]
+tmux = """
+B={{ branch | sanitize }}
+W={{ worktree_path }}
+R_RAW=$(basename "$(dirname "$(git -C "$W" rev-parse --path-format=absolute --git-common-dir)")")
+R=$(printf '%s' "$R_RAW" | tr -cs '[:alnum:]._-' '-')
+R=${R#-}
+R=${R%-}
+[ -n "$R" ] || R=repo
+S="$R/$B"
+
+tmux new-session -d -s "$S" -c "$W" -n CODE
+tmux new-window -t "$S" -c "$W" -n AI
+P1=$(tmux new-window -P -t "$S" -c "$W" -n SERVERS -F '#{pane_id}')
+P23=$(tmux split-window -d -h -t "$P1" -c "$W" -p 66 -P -F '#{pane_id}')
+P3=$(tmux split-window -d -h -t "$P23" -c "$W" -p 50 -P -F '#{pane_id}')
+tmux new-window -t "$S" -c "$W" -n MISC
+
+tmux send-keys -t "$S:CODE" 'nvim' Enter
+tmux send-keys -t "$S:AI" 'opencode' Enter
+tmux send-keys -t "$P1" "sh -lc 'pnpm i && moon run :build -f && { tmux wait-for -S \"$S-build\"; exec moon run server:dev; }'" Enter
+tmux send-keys -t "$P3" "sh -lc 'tmux wait-for \"$S-build\" && exec moon run admin:dev'" Enter
+
+tmux select-window -t "$S:CODE"
+echo "Attach with: tmux attach -t $S"
+"""
+
+[pre-remove]
+tmux = """
+B={{ branch | sanitize }}
+W={{ worktree_path }}
+R_RAW=$(basename "$(dirname "$(git -C "$W" rev-parse --path-format=absolute --git-common-dir)")")
+R=$(printf '%s' "$R_RAW" | tr -cs '[:alnum:]._-' '-')
+R=${R#-}
+R=${R%-}
+[ -n "$R" ] || R=repo
+S="$R/$B"
+TARGET="$R/main"
+
+if [ "$S" != "$TARGET" ] && [ -n "$TMUX" ] && tmux has-session -t "$TARGET" 2>/dev/null; then
+  tmux switch-client -t "$TARGET"
+fi
+
+tmux kill-session -t "$S" 2>/dev/null || true
+"""

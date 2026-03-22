@@ -1,5 +1,5 @@
 alias vim='nvim'
-alias ls='eza'
+alias ls='eza --icons=always'
 alias cat='bat'
 
 alias k='kubectl'
@@ -20,4 +20,6 @@ alias gb='git branch'
 alias gi='git init'
 alias gcl='git clone'
 
+alias opencode='opencode --port'
 
+alias tms="tv tmux-sessions"

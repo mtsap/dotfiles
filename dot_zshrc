@@ -11,6 +11,10 @@ export ZSH="$HOME/.oh-my-zsh"
 HISTFILE=~/.histfile
 HISTSIZE=10000
 SAVEHIST=10000
+setopt HIST_IGNORE_DUPS       # ignore only consecutive duplicates
+setopt HIST_SAVE_NO_DUPS      # avoid writing older duplicate events to the history file
+setopt SHARE_HISTORY
+
 unsetopt beep
 # bindkey -v
 # End of lines configured by zsh-newuser-install
@@ -106,6 +110,7 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview \
 zstyle ':fzf-tab:complete:git-checkout:*' fzf-preview \
   'git show --color=always $word 2>/dev/null || git branch --color=always'
 
+export FZF_CTRL_R_COMMAND=
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
 # eval $(keychain --eval --quiet ~/.ssh/id_bitbucket) 
@@ -140,3 +145,4 @@ if [ -f '/home/mtsap/bin/google-cloud-sdk/path.zsh.inc' ]; then . '/home/mtsap/b
 if [ -f '/home/mtsap/bin/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/mtsap/bin/google-cloud-sdk/completion.zsh.inc'; fi
 
 if command -v wt >/dev/null 2>&1; then eval "$(command wt config shell init zsh)"; fi
+source "$HOME/.config/television/shell/integration.zsh"

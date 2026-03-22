@@ -1,0 +1,53 @@
+[metadata]
+name = "tmux-sessions"
+description = "List and manage tmux sessions"
+requirements = ["tmux"]
+
+[source]
+command = "current=$(tmux display-message -p -t \"$TMUX_PANE\" '#S' 2>/dev/null || true); tmux list-sessions -F '#{session_name}__TV__#{session_windows} windows__TV__#{session_created_string}' | awk -F '__TV__' -v curr=\"$current\" 'BEGIN{OFS=\"__TV__\"} {label = ($1 == curr ? \"[CURR] \" : \"\"); print $1, label $1, $2, $3}'"
+display = "{split:__TV__:1} ({split:__TV__:2})"
+output = "{split:__TV__:0}"
+
+[preview]
+command = "tmux capture-pane -e -t '{split:__TV__:0}' -p 2>/dev/null || echo 'No preview available'"
+
+[keybindings]
+enter = "actions:switch"
+alt-a = "actions:attach"
+alt-k = "actions:kill"
+alt-d = "actions:detach"
+alt-r = "actions:rename"
+alt-n = "actions:new"
+
+[actions.new]
+description = "Create and switch to a new session"
+command = "printf 'New session name: '; IFS= read -r name && [ -n \"$name\" ] && tmux new-session -d -s \"$name\" && if [ -n \"$TMUX\" ]; then tmux switch-client -t \"$name\"; else tmux attach-session -t \"$name\"; fi"
+shell = "bash"
+mode = "execute"
+
+[actions.attach]
+description = "Attach to the selected session"
+command = "tmux attach-session -t '{split:__TV__:0}'"
+mode = "execute"
+
+[actions.switch]
+description = "Switch to the selected session"
+command = "tmux switch-client -t '{split:__TV__:0}'"
+mode = "execute"
+
+
+[actions.detach]
+description = "Detach from the selected session"
+command = "tmux detach-client -t '{split:__TV__:0}'"
+mode = "execute"
+
+[actions.rename]
+description = "Rename the selected session"
+command = "old='{split:__TV__:0}'; printf 'Rename session %s to: ' \"$old\"; IFS= read -r new && [ -n \"$new\" ] && tmux rename-session -t \"$old\" \"$new\""
+shell = "bash"
+mode = "execute"
+
+[actions.kill]
+description = "Kill the selected session"
+command = "tmux kill-session -t '{split:__TV__:0}'>/dev/null"
+mode = "execute"
