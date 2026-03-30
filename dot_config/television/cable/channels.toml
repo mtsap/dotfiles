@@ -8,6 +8,7 @@ command = ["tv list-channels"]
 
 [preview]
 command = "bat -pn --color always ${XDG_CONFIG_HOME:-$HOME/.config}/television/cable/**/{}.toml"
+env = { BAT_THEME = "television-match" }
 
 [keybindings]
 enter = "actions:channel-enter"

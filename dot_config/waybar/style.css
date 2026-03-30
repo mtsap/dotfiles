@@ -3,13 +3,13 @@
 @define-color bg        #282828;
 @define-color fglight   #282828;
 @define-color bg1       #3c3836;
-@define-color bg2       #504945;
+@define-color bg2       #5b534f;
 @define-color bg3       #665c54;
 @define-color bg4       #7c6f64;
 @define-color fg        #ebdbb2;
 @define-color red       #cc241d;
 @define-color green     #98971a;
-@define-color yellow    #d79921;
+@define-color yellow    #ffcf00;
 @define-color blue      #458588;
 @define-color purple    #b16286;
 @define-color aqua      #689d6a;
@@ -17,12 +17,12 @@
 @define-color brgray    #928374;
 @define-color brred     #fb4934;
 @define-color brgreen   #b8bb26;
-@define-color bryellow  #fabd2f;
+@define-color bryellow  #ffcf00;
 @define-color brblue    #83a598;
 @define-color brpurple  #d3869b;
 @define-color braqua    #8ec07c;
-@define-color orange    #d65d0e;
-@define-color brorange  #fe8019;
+@define-color orange    #ff9a2f;
+@define-color brorange  #ff9a2f;
 @define-color tooltipbg rgba(40, 40, 40, 0.8);
 
 /* Gruvbox Light */
@@ -54,39 +54,46 @@
 */
 
 * {
-    font-size: 15px;
-    border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
 }
 
 tooltip {
-    font-family: scientifica,Iosevka Nerd Font Propo, monospace;
-    background-color: @tooltipbg;
-    border-radius: 5px;
-    border: 1px solid @bg3;
+  font-family:
+    scientifica,
+    Iosevka Nerd Font Propo,
+    monospace;
+  background-color: @tooltipbg;
+  border-radius: 5px;
+  border: 1px solid @bg3;
 }
 
 tooltip label {
-    color: @fg;
-    text-shadow: none;
+  color: @fg;
+  text-shadow: none;
 }
 
 window#waybar {
-    /* `otf-font-awesome` is required to be installed for icons */
-    font-family: scientifica,Iosevka Nerd Font Propo, monospace;
-    background-color: transparent;
-    border-bottom: 0px;
-    color: @fg;
-    transition-property: background-color;
-    transition-duration: .5s;
+  /* `otf-font-awesome` is required to be installed for icons */
+  font-family:
+    scientifica,
+    Iosevka Nerd Font Propo,
+    monospace;
+  background-color: transparent;
+  border-bottom: 0px;
+  color: @fg;
+  transition-property: background-color;
+  transition-duration: 0.5s;
 }
 
 window#waybar.hidden {
-    opacity: 0.2;
+  opacity: 0.2;
 }
 
 window#waybar.empty #window {
-    background-color: transparent;
-    padding: 0;
+  background-color: transparent;
+  padding: 0;
 }
 
 /*
@@ -99,19 +106,19 @@ window#waybar.solo {
 */
 
 .modules-right {
-    margin: 10px 10px 0 0;
+  margin: 10px 10px 0 0;
 }
 .modules-center {
-    margin: 10px 0 0 0;
+  margin: 10px 0 0 0;
 }
 .modules-left {
-    margin: 10px 0 0 10px;
+  margin: 10px 0 0 10px;
 }
 
 button {
-    /* Use box-shadow instead of border so the text isn't offset */
-    /* box-shadow: inset 0 -3px transparent; */
-    border: none;
+  /* Use box-shadow instead of border so the text isn't offset */
+  /* box-shadow: inset 0 -3px transparent; */
+  border: none;
 }
 
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
@@ -122,45 +129,44 @@ button:hover {
 } */
 
 #workspaces {
-    background-color: @bg;
-    border: 1px solid @orange;
+  background-color: @bg;
+  border: 3px solid @orange;
 }
 
 #workspaces button {
-    padding: 0 5px;
-    background-color: transparent;
-    color: @fg;
-    border-radius: 0;
+  padding: 0 5px;
+  background-color: transparent;
+  color: @bg2;
+  border-radius: 0;
 }
 
-
 #workspaces button:first-child {
-    border-radius: 5px 0 0 5px;
+  border-radius: 5px 0 0 5px;
 }
 
 #workspaces button:last-child {
-    border-radius: 0 5px 5px 0;
+  border-radius: 0 5px 5px 0;
 }
 
 #workspaces button:first-child:last-child {
-    border-radius: 5px;
+  border-radius: 5px;
 }
 
 #workspaces button:hover {
-    color: @yellow;
+  color: @yellow;
 }
 
 #workspaces button.focused {
-    background-color: @bg3;
-    /* box-shadow: inset 0 -3px #ffffff; */
+  background-color: @bg3;
+  /* box-shadow: inset 0 -3px #ffffff; */
 }
 
 #workspaces button.active {
-    color: @orange;
+  color: @orange;
 }
 
 #workspaces button.urgent {
-    background-color: @purple;
+  background-color: @purple;
 }
 
 #cpu,
@@ -169,6 +175,7 @@ button:hover {
 #network,
 #idle_inhibitor,
 #cava,
+#custom-logo,
 #scratchpad,
 #mode,
 #window,
@@ -181,77 +188,105 @@ button:hover {
 #mpris,
 #load,
 #language {
-    padding: 0 10px;
-    background-color: @bg;
-    color: @fg;
-    border: 1px solid @orange;
+  padding: 0 10px;
+  background-color: @bg;
+  color: @fg;
+  border: 3px solid @orange;
 }
 
 #mode {
-    background-color: @aqua;
-    color: @fglight;
-    /* box-shadow: inset 0 -3px #ffffff; */
+  background-color: @aqua;
+  color: @fglight;
+  /* box-shadow: inset 0 -3px #ffffff; */
 }
 
 /* If workspaces is the leftmost module, omit left margin */
 .modules-left > widget:first-child > #workspaces {
-    margin-left: 0;
+  margin-left: 0;
 }
 
 /* If workspaces is the rightmost module, omit right margin */
 .modules-right > widget:last-child > #workspaces {
-    margin-right: 0;
+  margin-right: 0;
 }
 
 #cava {
-    padding: 0 5px;
+  padding: 0 5px;
+  color: @brorange;
+  border-color: @bg2;
 }
 
-#battery.charging, #battery.plugged {
-    background-color: @green;
-    color: @fglight;
+#custom-logo {
+  color: @yellow;
+  border-color: @bg;
+}
+
+#cpu {
+  color: @yellow;
+  border-color: @bg2;
+}
+
+#clock {
+  color: @orange;
+  border-color: @bg2;
+}
+
+#battery.charging,
+#battery.plugged {
+  background-color: @green;
+  color: @fglight;
 }
 
 @keyframes blink {
-    to {
-        background-color: @bg;
-        color: @fg;
-    }
+  to {
+    background-color: @bg;
+    color: @fg;
+  }
 }
 
 /* Using steps() instead of linear as a timing function to limit cpu usage */
 #battery.critical:not(.charging) {
-    background-color: @red;
-    color: @fg;
-    animation-name: blink;
-    animation-duration: 0.5s;
-    animation-timing-function: steps(12);
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
+  background-color: @red;
+  color: @fg;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: steps(12);
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
 }
 
 #wireplumber.muted {
-    background-color: @blue;
+  background-color: @blue;
 }
 
 #tray > .passive {
-    -gtk-icon-effect: dim;
+  -gtk-icon-effect: dim;
 }
 
 #tray > .needs-attention {
-    -gtk-icon-effect: highlight;
+  -gtk-icon-effect: highlight;
+}
+
+#mpris {
+  background-color: @fg;
+  color: @bg;
+  border-color: @bg2;
 }
 
 #mpris.playing {
-    background-color: @yellow;
-    color: @fglight;
+  background-color: @fglight;
+  color: @yellow;
+}
+
+#tray {
+  border-color: @orange;
 }
 
 #tray menu {
-    font-family: sans-serif;
+  font-family: sans-serif;
 }
 
 #scratchpad.empty {
-    background: transparent;
-    padding: 0;
+  background: transparent;
+  padding: 0;
 }

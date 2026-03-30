@@ -244,6 +244,7 @@ fallback_channel = "files"
 "docker-images" = ["docker run"]
 "git-repos" = ["nvim", "code", "hx", "git clone"]
 "procs" = ["ps", "kill"]
+"moon-projects" = ["moon run", "moonx"]
 
 
 [shell_integration.keybindings]

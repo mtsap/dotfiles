@@ -1,14 +1,11 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 export ZSH="$HOME/.oh-my-zsh"
 
-# Lines configured by zsh-newuser-install
-HISTFILE=~/.histfile
+_source_if_readable() {
+  [[ -r "$1" ]] && source "$1"
+}
+
+# History and shell behavior
+HISTFILE="$HOME/.histfile"
 HISTSIZE=10000
 SAVEHIST=10000
 setopt HIST_IGNORE_DUPS       # ignore only consecutive duplicates
@@ -17,132 +14,135 @@ setopt SHARE_HISTORY
 
 unsetopt beep
 # bindkey -v
-# End of lines configured by zsh-newuser-install
-# The following lines were added by compinstall
-zstyle :compinstall filename '/home/mtsap/.zshrc'
 
-plugins=(zsh-pnpm-completions git extract vi-mode safe-paste node fzf-tab rust zsh-syntax-highlighting zsh-completions)
-source $ZSH/oh-my-zsh.sh
-# End of lines added by compinstall
-source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-# General config
-export LC_ALL=en_US.UTF-8
-export LANG=en_US.UTF-8
-export LANGUAGE=en_US.UTF-8
+# Oh My Zsh
+zstyle :compinstall filename "$HOME/.zshrc"
 
-# FZF config
-# export FZF_DEFAULT_OPTS=' --border -m --bind="\\:toggle-preview" --preview-window right:50% --preview "[[ $(file --mime {}) =~ binary ]] && echo {} is a binary file || (bat --theme=gruvbox --style=numbers --color=always {} || cat {}) 2> /dev/null | head -200"'
-# export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+plugins=(
+  zsh-pnpm-completions
+  git
+  extract
+  vi-mode
+  safe-paste
+  node
+  fzf-tab
+  rust
+  zsh-completions
+  zsh-syntax-highlighting
+)
 
-### ==========================================
-### FZF — appearance (Gruvbox theme)
-### ==========================================
+source "$ZSH/oh-my-zsh.sh"
 
+# Prompt
+_source_if_readable /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
+_source_if_readable "$HOME/.p10k.zsh"
+
+# Locale
+export LC_ALL="en_US.UTF-8"
+export LANG="en_US.UTF-8"
+export LANGUAGE="en_US.UTF-8"
+
+# FZF and fzf-tab
 export FZF_DEFAULT_OPTS="
-  --height=50%
+  --height=60%
   --layout=reverse
-  --border
-  --inline-info
-  --info=inline
+  --border=rounded
+  --info=inline-right
   --cycle
   --scroll-off=3
   --tabstop=4
+  --margin=1
+  --padding=1
+  --preview-window=right,55%,border-left,wrap
+  --bind='ctrl-/:change-preview-window(right,55%,border-left,wrap|down,40%,border-top,wrap|hidden)'
+  --preview='if [[ -d {} ]]; then eza --color=always --icons --tree --level=2 {} | head -200; elif [[ -f {} || -L {} ]]; then bat --theme="television-match" --color=always --style=plain --paging=never {} 2>/dev/null; else printf "%s\n" {}; fi'
 
-  # Gruvbox colors
-  --color=bg+:#3c3836,bg:#282828,fg:#ebdbb2,hl:#fb4934
-  --color=fg+:#ebdbb2,header:#fabd2f,info:#83a598
-  --color=border:#665c54,prompt:#fe8019,spinner:#fb4934
-  --color=pointer:#fb4934,marker:#b8bb26
+  --color=bg:#272727,bg+:#2c2c2c,fg:#e6e6e6,fg+:#FFBF3C
+  --color=hl:#E53935,hl+:#E53935,header:#FB8C00,info:#7f7f7f
+  --color=border:#FB8C00,prompt:#FB8C00,spinner:#E53935
+  --color=pointer:#FB8C00,marker:#FB8C00,gutter:#272727
+  --color=separator:#FB8C00,scrollbar:#FB8C00
+  --color=preview-border:#FB8C00,input-border:#FB8C00,list-border:#FB8C00
 "
 
-# Optional: fuzzy commands
-export FZF_CTRL_T_COMMAND="fd --type f --hidden --follow --exclude .git"
-export FZF_ALT_C_COMMAND="fd --type d --hidden --follow --exclude .git"
-
-### ==========================================
-### FZF-TAB — appearance + layout
-### ==========================================
+export FZF_CTRL_R_OPTS="
+  --header='History'
+  --preview 'echo {}'
+  --preview-window=down,4,border-top,hidden,wrap
+  --bind='?:toggle-preview'
+"
 
 zstyle ':fzf-tab:*' popup-border rounded
-zstyle ':fzf-tab:*' popup-pad '7 2'
+zstyle ':fzf-tab:*' popup-pad '1 1'
 
 zstyle ':fzf-tab:*' fzf-flags \
-  --height=80% \
-  --border \
+  --height=70% \
+  --border=rounded \
   --layout=reverse \
-  --info=inline \
+  --info=inline-right \
+  --margin=1 \
+  --padding=1 \
+  --preview-window=right,50%,border-left,wrap \
   --prompt=' ' \
   --marker='● ' \
   --pointer='▶ ' \
+  --color=bg:#272727,bg+:#2c2c2c,fg:#e6e6e6,fg+:#FFBF3C \
+  --color=hl:#E53935,hl+:#E53935,header:#FB8C00,info:#7f7f7f \
+  --color=border:#FB8C00,prompt:#FB8C00,spinner:#E53935 \
+  --color=pointer:#FB8C00,marker:#FB8C00,gutter:#272727 \
+  --color=separator:#FB8C00,scrollbar:#FB8C00 \
+  --color=preview-border:#FB8C00,input-border:#FB8C00,list-border:#FB8C00 \
   --cycle
 
 zstyle ':fzf-tab:*' switch-group 'ctrl-h' 'ctrl-l'
-zstyle ':fzf-tab:*' group-colors "fg=yellow" "fg=green" "fg=cyan"
+zstyle ':fzf-tab:*' group-colors \
+  $'\e[38;2;127;127;127m' \
+  $'\e[38;2;251;140;0m' \
+  $'\e[38;2;229;57;53m' \
+  $'\e[38;2;255;191;60m' \
+  $'\e[38;2;189;189;189m' \
+  $'\e[38;2;251;140;0m' \
+  $'\e[38;2;229;57;53m' \
+  $'\e[38;2;255;191;60m'
 
 zstyle ':completion:*' list-colors ''
 zstyle ':fzf-tab:*' prefix ''
 
-
-### ==========================================
-### FZF-TAB — preview using bat + eza
-### ==========================================
-
-# Default preview: directory = eza, file = bat
 zstyle ':fzf-tab:*' fzf-preview '
-  if [[ -d $realpath ]]; then
-      eza --color=always --icons --tree --level=2 $realpath | head -200
+  if [[ -d "$realpath" ]]; then
+      eza --color=always --icons --tree --level=2 "$realpath" | head -200
   else
-      bat --color=always --style=plain --paging=never $realpath 2>/dev/null \
-      || less $realpath
+      bat --theme="television-match" --color=always --style=plain --paging=never "$realpath" 2>/dev/null \
+      || less "$realpath"
   fi
 '
 
-# kill command preview
-zstyle ':fzf-tab:complete:kill:*' fzf-preview 'ps -f -p $word'
-
-# cd preview (using eza)
+zstyle ':fzf-tab:complete:kill:*' fzf-preview 'ps -f -p "$word"'
 zstyle ':fzf-tab:complete:cd:*' fzf-preview \
-  'eza --color=always --icons --tree --level=2 $realpath | head -200'
-
-# git checkout preview
+  'eza --color=always --icons --tree --level=2 "$realpath" | head -200'
 zstyle ':fzf-tab:complete:git-checkout:*' fzf-preview \
-  'git show --color=always $word 2>/dev/null || git branch --color=always'
+  'git show --color=always "$word" 2>/dev/null || git branch --color=always'
 
-export FZF_CTRL_R_COMMAND=
-source /usr/share/fzf/key-bindings.zsh
-source /usr/share/fzf/completion.zsh
-# eval $(keychain --eval --quiet ~/.ssh/id_bitbucket) 
-# source $HOME/.zshfnm
-source /usr/share/nvm/init-nvm.sh
-#aliases
-source ~/.zshaliases
-# zsh syntax highlight
-# source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /home/mtsap/.zshjdk15
-source /home/mtsap/.zshandroid
-if [[ -f "/home/mtsap/.zshwork" ]]; then
-source /home/mtsap/.zshwork
+_source_if_readable /usr/share/fzf/completion.zsh
+
+# Tooling
+_source_if_readable /usr/share/nvm/init-nvm.sh
+_source_if_readable "$HOME/.zshaliases"
+_source_if_readable "$HOME/.zshjdk15"
+_source_if_readable "$HOME/.zshandroid"
+_source_if_readable "$HOME/.zshwork"
+_source_if_readable "$HOME/.config/zsh/worktrunk.zsh"
+_source_if_readable "$HOME/.config/tabtab/zsh/__tabtab.zsh"
+_source_if_readable "$HOME/.bun/_bun"
+
+# Cloud SDKs
+_source_if_readable "$HOME/bin/google-cloud-sdk/path.zsh.inc"
+_source_if_readable "$HOME/bin/google-cloud-sdk/completion.zsh.inc"
+
+# Interactive integrations
+if command -v wt >/dev/null 2>&1; then
+  eval "$(command wt config shell init zsh)"
 fi
 
-[ -f ~/.config/zsh/worktrunk.zsh ] && source ~/.config/zsh/worktrunk.zsh
-
-#[ -s "/home/mtsap/.jabba/jabba.sh" ] && source "/home/mtsap/.jabba/jabba.sh"
-#add ghcup to path
-# export PATH="$HOME/.cabal/bin:${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/bin:$PATH"
-# tabtab source for packages
-# uninstall by removing these lines
-[[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
-# bun completions
-[ -s "/home/mtsap/.bun/_bun" ] && source "/home/mtsap/.bun/_bun"
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/mtsap/bin/google-cloud-sdk/path.zsh.inc' ]; then . '/home/mtsap/bin/google-cloud-sdk/path.zsh.inc'; fi
-# The next line enables shell command completion for gcloud.
-if [ -f '/home/mtsap/bin/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/mtsap/bin/google-cloud-sdk/completion.zsh.inc'; fi
-
-if command -v wt >/dev/null 2>&1; then eval "$(command wt config shell init zsh)"; fi
-source "$HOME/.config/television/shell/integration.zsh"
+_source_if_readable "$HOME/.config/television/shell/integration.zsh"
+_source_if_readable /usr/share/fzf/key-bindings.zsh

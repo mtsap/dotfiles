@@ -93,7 +93,7 @@ local plugins = {
 			set_keymaps()
 
 			-- Re-register for terminal buffers to prevent literal command injection
-			vim.api.nvim_create_autocmd("TermOpen", {
+			vim.api.nvim_create_autocmd("TermEnter", {
 				callback = set_keymaps,
 			})
 		end,
@@ -121,7 +121,7 @@ local plugins = {
 	{
 		"nvim-lualine/lualine.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
-		config = get_setup("statusline"),
+		config = get_setup("lualine-warm"),
 	},
 	{
 		"folke/snacks.nvim",
@@ -235,6 +235,11 @@ local plugins = {
 		version = "1.*",
 		build = "cargo build --release",
 		config = get_setup("blink"),
+	},
+	{
+		"b0o/SchemaStore.nvim",
+		lazy = false,
+		version = false,
 	},
 	{
 		"mfussenegger/nvim-lint",

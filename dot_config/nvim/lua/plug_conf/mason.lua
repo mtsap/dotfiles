@@ -1,6 +1,7 @@
 require("mason").setup({
 	ensure_installed = {
 		"yamlfmt",
+		"yaml-language-server",
 		"yamllint",
 		"jq",
 
@@ -11,10 +12,12 @@ require("mason").setup({
 		-- web dev stuff
 		"css-lsp",
 		"html-lsp",
+		"json-lsp",
 		"typescript-language-server",
 		"deno",
 		"prettier",
 		"eslint_d",
+		"oxfmt",
 		--rust
 		"rust-analyzer",
 		"rust-fmt",

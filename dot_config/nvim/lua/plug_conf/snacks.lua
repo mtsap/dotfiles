@@ -122,6 +122,33 @@ vim.keymap.set(Mode.normal, "<leader>fg", function()
 	Snacks.picker.grep()
 end, { noremap = true })
 
+vim.keymap.set(Mode.normal, "<leader>fgg", function()
+	local Snacks = require("snacks")
+	Snacks.picker({
+		finder = "proc",
+		cmd = "fd",
+		args = { "--type", "d", "--exclude", ".git" },
+		title = "Select search directory",
+		layout = {
+			preset = "select",
+		},
+		actions = {
+			confirm = function(picker, item)
+				picker:close()
+				vim.schedule(function()
+					Snacks.picker.grep({
+						cwd = item.file,
+					})
+				end)
+			end,
+		},
+		transform = function(item)
+			item.file = item.text
+			item.dir = true
+		end,
+	})
+end, { noremap = true })
+
 -- vim.keymap.set(Mode.normal, "<leader>fb", function()
 -- 	Snacks.picker.buffers()
 -- end, { noremap = true })

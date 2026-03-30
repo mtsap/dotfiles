@@ -1,38 +1,50 @@
-local DISABLE_HIGHLIGHT_THRESHOLD = 30000
+local MAX_LINES = 30000
+local MAX_FILESIZE = 200 * 1024
+
+local function disable_highlight(_, bufnr)
+  local filename = vim.api.nvim_buf_get_name(bufnr)
+  local ok, stat = pcall(vim.uv.fs_stat, filename)
+
+  if ok and stat and stat.size > MAX_FILESIZE then
+    return true
+  end
+
+  return vim.api.nvim_buf_line_count(bufnr) > MAX_LINES
+end
 
 require("nvim-treesitter.configs").setup({
   ensure_installed = {
+    "bash",
+    "c",
     "cpp",
     "css",
-    "go",
-    "html",
-    "lua",
-    "typescript",
-    "vim",
-    "javascript",
-    "tsx",
-    "json",
-    "c",
-    "yaml",
-    "xml",
-    "tsv",
-    "toml",
-    "sql",
-    "rust",
-    "ruby",
-    "python",
-    "psv",
-    "graphql",
-    "dockerfile",
     "csv",
-    "bash",
-    "markdown",
-    "markdown_inline",
-    -- go
+    "dockerfile",
     "go",
     "gomod",
-    "gowork",
     "gotmpl",
+    "gowork",
+    "graphql",
+    "html",
+    "javascript",
+    "json",
+    "lua",
+    "markdown",
+    "markdown_inline",
+    "psv",
+    "python",
+    "query",
+    "ruby",
+    "rust",
+    "sql",
+    "toml",
+    "tsv",
+    "tsx",
+    "typescript",
+    "vim",
+    "vimdoc",
+    "xml",
+    "yaml",
   },
   auto_install = true,
   sync_install = false,
@@ -45,8 +57,6 @@ require("nvim-treesitter.configs").setup({
   highlight = {
     enable = true,
     additional_vim_regex_highlighting = false,
-    disable = function(_lang, _bufnr)
-      return vim.api.nvim_buf_line_count(0) > DISABLE_HIGHLIGHT_THRESHOLD
-    end,
-  }
+    disable = disable_highlight,
+  },
 })

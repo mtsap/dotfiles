@@ -8,7 +8,7 @@ command = [ "fd -t f -H", "fd -t f"]
 
 [preview]
 command = "bat -n --color=always '{}'"
-env = { BAT_THEME = "gruvbox-dark" }
+env = { BAT_THEME = "television-match" }
 
 [keybindings]
 shortcut = "f1"

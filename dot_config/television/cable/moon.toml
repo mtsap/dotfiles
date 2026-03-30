@@ -1,0 +1,10 @@
+[metadata]
+name = "moon-projects"
+description = "List Moon projects"
+requirements = ["moon", "moonx", "jq"]
+
+[source]
+command = " moon tasks --json | jq -r '.[].target'"
+
+[ui.preview_panel]
+size = 30
