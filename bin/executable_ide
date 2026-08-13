@@ -44,7 +44,6 @@ main() {
   local current_pane_id
   local session_ref
   local session_window_ref
-  local ai_pane
   local servers_pane_1
   local servers_pane_2
 
@@ -74,7 +73,6 @@ main() {
   tmux kill-pane -a -t "$current_pane_id"
   tmux rename-window -t "$current_window_id" CODE
 
-  ai_pane=$(tmux new-window -d -P -F '#{pane_id}' -t "$session_window_ref" -c "$PWD" -n AI)
   servers_pane_1=$(tmux new-window -d -P -F '#{pane_id}' -t "$session_window_ref" -c "$PWD" -n SERVERS)
   tmux new-window -d -t "$session_window_ref" -c "$PWD" -n MISC >/dev/null
 
@@ -82,8 +80,7 @@ main() {
   tmux split-window -d -h -t "$servers_pane_2" -c "$PWD" >/dev/null
   tmux select-layout -t "$session_ref:SERVERS" even-horizontal >/dev/null
 
-  tmux send-keys -t "$ai_pane" 'opencode' Enter
-  tmux send-keys -t "$servers_pane_1" 'pnpm install && moonx run :build' Enter
+  tmux send-keys -t "$servers_pane_1" 'pnpm install && moonx :build' Enter
   tmux select-window -t "$current_window_id"
 
   exec nvim

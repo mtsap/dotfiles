@@ -1,0 +1,6 @@
+require("programs")
+require("monitor")
+require("startup")
+require("env")
+require("settings")
+require("binds")

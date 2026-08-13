@@ -9,16 +9,8 @@
     "spacing": 4, // Gaps between modules (4px)
     // Choose the order of the modules
     "modules-left": ["custom/logo", "hyprland/workspaces", "hyprland/window", "mpris"],
-    "modules-center": ["clock", "hyprland/language", "tray", "cava"],
-    "modules-right": [
-      "cpu",
-      "memory",
-      "temperature",
-      "network",
-      "wireplumber",
-      "backlight",
-      "battery",
-    ],
+    "modules-center": ["clock", "hyprland/language", "custom/voxtype", "tray", "cava"],
+    "modules-right": ["cpu", "memory", "temperature", "network", "wireplumber", "backlight", "battery"],
     // Modules configuration
     "network": {
       "interface": "enp6s0",
@@ -77,6 +69,13 @@
       "format": "{title}",
       "max-length": 80,
       "all-outputs": true,
+    },
+    "custom/voxtype": {
+      "exec": "voxtype status --follow --format json",
+      "return-type": "json",
+      "format": "{}",
+      "tooltip": true,
+      "on-click": "systemctl --user restart voxtype",
     },
     "cava": {
       "cava_config": "$HOME/.config/cava/config",

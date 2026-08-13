@@ -146,3 +146,5 @@ fi
 
 _source_if_readable "$HOME/.config/television/shell/integration.zsh"
 _source_if_readable /usr/share/fzf/key-bindings.zsh
+
+eval "$(zoxide init zsh)"

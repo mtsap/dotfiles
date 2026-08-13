@@ -1,6 +1,7 @@
 alias vim='nvim'
 alias ls='eza --icons=always'
 alias cat='bat'
+alias cd='z'
 
 alias k='kubectl'
 alias kx='kubectx'
